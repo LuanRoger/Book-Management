@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../Models/encomenda.h"
-
+#include "../Generators/id_generator.c"
 
 Encomenda *root = NULL;
 
@@ -33,17 +33,18 @@ Encomenda* search(int id, Encomenda* aux){
 }
 
 
-void criarEncomenda(int id, char *nome_aluno, char *matricula, char *descricao){
+void criarEncomenda(char *nome_aluno, char *matricula, char *descricao){
 
+    int id = id_generator();
     //busca
-    Encomenda *aux = search(id, root); 
-    
+    Encomenda *aux = search(id, root);
+
     //condicao de existencia com base na busca
     if(aux != NULL && aux->id == id){ //se aux->id vinhesse como primeira condição daria estouro de memoria
         printf("Não foi possivel fazer a insercao\n");
 
     }else{
-        Encomenda* novaEncomenda = malloc(sizeof(Encomenda));
+        Encomenda* novaEncomenda = malloc(sizeof(Encomenda));        
         novaEncomenda->id = id;
         novaEncomenda->nome_aluno = nome_aluno;
         novaEncomenda->matricula = matricula;
@@ -139,9 +140,13 @@ void in_ordem(Encomenda *aux){
 
 
 int main(){
-    criarEncomenda(6, "Vinicius", "5151", "Fundamentos da programação");
-    criarEncomenda(2, "Luan", "362431", "Java2.5");
-    criarEncomenda(3, "Catu", "514357", "Me ajuda pf");
+    criarEncomenda("Vinicius", "5151", "Fundamentos da programação");
+    criarEncomenda("Luan", "362431", "Java2.5");
+    criarEncomenda("Catu", "514357", "Me ajuda pf");
+    criarEncomenda("Catu", "514357", "Me ajuda pf");
+    criarEncomenda("Catu", "514357", "Me ajuda pf");
+    criarEncomenda("Catu", "514357", "Me ajuda pf");
+    criarEncomenda("Catu", "514357", "Me ajuda pf");
     
     in_ordem(root);
     printf("\n");

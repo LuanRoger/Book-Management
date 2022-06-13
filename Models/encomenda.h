@@ -10,5 +10,5 @@ typedef struct Encomenda{
     struct Encomenda *left;
 }Encomenda;
 
-void criarEncomenda(int id, char *nome_aluno, char *matricula, char *descricao);
+void criarEncomenda(char *nome_aluno, char *matricula, char *descricao);
 #endif
