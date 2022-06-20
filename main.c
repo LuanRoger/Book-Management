@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include "Models/encomenda.h"
+#include "Users/user_verification.h"
 
 
 int main(){
@@ -10,7 +11,7 @@ int main(){
     int resp = -1;
     while(resp != 0){
         system("clear");
-        printf("\nBOOK MANAGEMENT\n");
+        printf("\n\tBOOK MANAGEMENT\n");
         printf("[1] - Encomendar um livro.\n");
         printf("[2] - Remover uma encomenda de livro.\n");
         printf("[3] - Remover um pedido de livro.\n");
@@ -21,24 +22,41 @@ int main(){
         if(resp == 1){
 
             printf("\nDigite o nome do aluno:\n");
-            char *nome_aluno = malloc(sizeof(256));
+            char *nome_aluno = malloc(sizeof(char));
             scanf(" %[^\n]s", nome_aluno);
 
             printf("\nDigite a matricula:\n");
-            char *matricula = malloc(sizeof(256));
+            char *matricula = malloc(sizeof(char));
             scanf(" %s", matricula);
 
             printf("\nDigite uma descricao:\n");
-            char *descricao = malloc(sizeof(256));
+            char *descricao = malloc(sizeof(char));
             scanf(" %[^\n]s", descricao);
 
             criarEncomenda(nome_aluno, matricula, descricao);
             
             sleep(2);
             
-        }else if(resp == 4){
-            in_ordem(root);
-            sleep(5);
+        }else if(resp == 2){
+            if(root == NULL){
+                printf("\nNENHUMA ENCOMENDA CADASTRADA\n");
+                sleep(2);
+            }else{
+                if(verification() == 1){
+                    printf("\nUSUARIO LOGADO\n");
+                    sleep(1);
+                    in_ordem(root);
+                }else
+                    printf("\nLOGIN E/OU SENHA INCORRETA\n");
+                    sleep(1);
+
+            }
+            printf("\n");
+
+            
+
+            
+            
         }
         /*if(resp == 1){
             //encomendar um livro
