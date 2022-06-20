@@ -7,8 +7,6 @@ typedef struct Encomenda{
     char *nome_aluno;
     char *matricula;
     char *descricao;
-    struct Encomenda *right;
-    struct Encomenda *left;
 }Encomenda;
 
 void criarEncomenda(char *nome_aluno, char *matricula, char *descricao);
