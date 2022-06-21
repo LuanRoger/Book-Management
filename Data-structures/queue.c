@@ -1,88 +1,43 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include "queue.h"
 
+void add_fila_pedido(PedidoFila* fila, Pedido* novo){
+    FilaItem* novoItem = malloc(sizeof(novoItem));
+    novoItem->valor = novo;
+    novoItem->prox = NULL;
 
-typedef struct prod{
-    int cod_prod;
-    double preco;
-}PROD;
+    if(fila->inicio == NULL)
+        fila->inicio = novoItem;
+    else if(fila->inicio->valor->prioridade < novoItem->valor->prioridade) {
+        novoItem->prox = fila->inicio;
+        fila->inicio = novoItem;
+    }
+    else {
+        FilaItem* aux = fila->inicio;
+        while (aux->valor->prioridade < novo->prioridade)
+            aux = aux->prox;
 
-typedef struct No{
-   
-    int cod_prod;
-    double preco;
-    
-    //mecanismo p/ unir nos!
-    struct No * prox;
-}NO;
+        novoItem->prox = aux->prox;
+        aux->prox = novoItem;
+    }
 
-NO * inicio = NULL;
-NO * fim = NULL;
-int tam = 0;
-
-void add(int cod_prod, double preco){
-    
-        NO * novo = malloc(sizeof(NO));
-        novo->cod_prod = cod_prod;
-        novo->preco = preco;
-        novo->prox = NULL;
-    
-        if(inicio == NULL){ //fila vazia
-            inicio = novo;
-            fim = novo;
-            tam++;
-        }else{ //add usando o antigo add fim da lista
-            fim->prox = novo;
-            fim = novo;
-            tam++;
-        }
+    fila->len++;
 }
 
+Pedido* remove_file_pedido(PedidoFila* fila) {
+    FilaItem* lixo = fila->inicio;
+    if(lixo->prox != NULL)
+        fila->inicio = lixo->prox;
 
-void imprimir(){
-    NO * aux = inicio;
-    for(int i = 0; i < tam; i++){
-        printf("Cod prod: %d\n", aux->cod_prod);
+    Pedido* isolated_pedido = lixo->valor;
+    free(lixo);
+    return isolated_pedido;
+}
+
+void imprimir_fila(PedidoFila* fila) {
+    FilaItem* aux = fila->inicio;
+    for(int i = 0; i < fila->len; i++){
+        printf("Responsavel encomenda: %s\n", aux->valor->responsavel_encomenda);
+        printf("Nome aluno: %s", aux->valor->info_encomenda->nome_aluno);
             aux = aux->prox;
     }
 }
-
-PROD remover(){
-    
-    PROD produto;
-    if(inicio != NULL){
-        //remover usando o antigo remover do inicio da lista!
-            
-            NO *lixo = inicio;
-            inicio = inicio->prox;
-            produto.cod_prod = lixo->cod_prod;
-            produto.preco = lixo->preco;
-            free(lixo);
-            tam--;
-            if(tam == 1){
-                fim = NULL;
-            }
-            
-    }
-    return produto;
-}
-
-
-int main(){
-
-    add(29383, 50.0);
-    add(29848, 150.0);
-    add(29646, 20.0);
-    add(29133, 20.0);
-    add(4444, 70.0);
-    printf("Impressao antes da remocao:\n");
-    imprimir();
-    PROD teste = remover();
-    printf("Cod prod removido eh:%d\n", teste.cod_prod);
-    
-    return 0;
-}
-
-
-
-
