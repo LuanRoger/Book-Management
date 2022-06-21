@@ -1,6 +1,7 @@
+#include "../Generators/id_generator.h"
+
 #ifndef ENCOMENDA_H
 #define ENCOMENDA_H
-#include "../Generators/id_generator.h"
 
 typedef struct Encomenda{
     int id;
@@ -9,8 +10,6 @@ typedef struct Encomenda{
     char *descricao;
 }Encomenda;
 
-void criarEncomenda(char *nome_aluno, char *matricula, char *descricao);
-Encomenda *search(int id, Encomenda* aux);
-Encomenda *removal(int id, Encomenda *aux);
-void in_ordem(Encomenda *aux);
+Encomenda* criar_encomenda(char *nome_aluno, char *matricula, char *descricao);
+void deletar_encomenda(Encomenda* encomenda);
 #endif
