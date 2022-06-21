@@ -1,93 +1,47 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include "list.h"
 
+void add_encomenda(ListaEncomenda* list, int pos, int id, char* nome_aluno, char* matricula, char* descricao){
+    if(pos < 0 && pos > list->len) return;
 
-typedef struct prod{
-    int cod_prod;
-    double preco;
-}PROD;
+    Encomenda* nova_encomenda = malloc(sizeof(Encomenda));
+    nova_encomenda->nome_aluno = nome_aluno;
+    nova_encomenda->matricula = matricula;
+    nova_encomenda->descricao = descricao;
 
-typedef struct No{
-   
-    int cod_prod;
-    double preco;
+    ItemListEncomenda* new_item = malloc(sizeof(ItemListEncomenda));
+    new_item->valor = nova_encomenda;
+    new_item->prox = NULL;
+    new_item->ant = NULL;
     
-    //mecanismo p/ unir nos!
-    struct No * prox;
-    struct No * ant;
-}NO;
+    if(list->inicio == NULL){ //lista vazia
+        list->inicio = new_item;
+        list->fim = new_item;
+    }else if(pos == 0){ //inicio
+        new_item->ant = new_item;
+        new_item->prox = list->inicio;
+        list->inicio = new_item;
+    }else if(pos == list->len){ //fim
+        new_item->ant = list->fim;
+        list->fim->prox = new_item;
+        list->fim = new_item;
+    }else{ // "no meio"
+        ItemListEncomenda* aux = list->inicio;
+        for(int i = 0; i < pos; i++)
+            aux = aux->prox;
 
-NO * inicio = NULL;
-NO * fim = NULL;
-int tam = 0;
-
-void add(int cod_prod, double preco, int pos){
-    
-    if(pos >= 0 && pos <= tam){
-    
-        NO * novo = malloc(sizeof(NO));
-        novo->cod_prod = cod_prod;
-        novo->preco = preco;
-        novo->prox = NULL;
-        novo->ant = NULL;
-    
-        if(inicio == NULL){ //lista vazia
-            inicio = novo;
-            fim = novo;
-            tam++;
-        }else if(pos == 0){ //inicio
-            inicio->ant = novo;
-            novo->prox = inicio;
-            inicio = novo;
-            tam++;
-        }else if(pos == tam){ //fim
-            novo->ant = fim;
-            fim->prox = novo;
-            fim = novo;
-            tam++;
-        }else{ // "no meio"
-            
-            NO * aux = inicio;
-            for(int i = 0; i < pos; i++){
-                //OPERACAO DE CAMINHADA - MUITO IMPORTANTE
-                aux = aux->prox;
-            
-            }
-            novo->prox = aux;
-            aux->ant->prox = novo;
-            novo->ant = aux->ant;
-            aux->ant = novo;
-            tam++;
-            
-        }
-    
-    }else{
-        printf("deu ruim!!\n");
+        new_item->prox = aux;
+        new_item->ant->prox = new_item;
+        new_item->ant = aux->ant;
+        aux->ant = new_item;
     }
+
+    list->len++;
 }
 
-
-void imprimir(){
-    NO * aux = inicio;
-    for(int i = 0; i < tam; i++){
-        printf("Cod prod: %d\n", aux->cod_prod);
+void imprimir(ListaEncomenda* list){
+    ItemListEncomenda* aux = list->inicio;
+    for(int i = 0; i < list->len; i++){
+        printf("Cod prod: %s\n", aux->valor->nome_aluno);
             aux = aux->prox;
     }
 }
-
-int main(){
-
-    add(29383, 50.0, 0);
-    add(29848, 150.0, 0);
-    add(29646, 20.0, 2);
-    add(29133, 20.0, 0);
-    add(4444, 70.0, 3);
-    printf("Impressao antes da remocao:\n");
-    imprimir();
-   
-    return 0;
-}
-
-
-
-
