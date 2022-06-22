@@ -1,22 +1,20 @@
-#include "../Models/encomenda.h"
+#include "../Models/usuario.h"
 #include <stdio.h>
 #include <stdlib.h>
 
 #ifndef LIST_H
 #define LIST_H
-typedef struct ItemListEncomenda {
-   Encomenda* valor;
-   struct ItemListEncomenda* prox;
-   struct ItemListEncomenda* ant;
-}ItemListEncomenda;
-typedef struct ListaEncomenda
-{
-    ItemListEncomenda* inicio;
-    ItemListEncomenda* fim;
-    int len;  
-}ListaEncomenda;
+typedef struct ItemListUsuario{
+   Usuario* valor;
+   struct ItemListUsuario* prox;
+}ItemListUsuario;
 
-void add_encomenda(ListaEncomenda* list, int pos, int id, char* nome_aluno, char* matricula, char* descricao);
-void imprimir();
+typedef struct ListaUsuario{
+    ItemListUsuario* inicio;
+    int len;  
+}ListaUsuario;
+
+void addListaUsuario(ListaUsuario* list, Usuario* usuario);
+void imprimir_lista(ListaUsuario* list);
 
 #endif

@@ -1,4 +1,5 @@
 #include "../Models/pedido.h"
+#include "../Models/encomenda.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -9,12 +10,13 @@ typedef struct FilaItem{
     
     struct FilaItem* prox;
 }FilaItem;
-typedef struct PedidoFila{
+typedef struct filaPedido{
     FilaItem* inicio;
+    FilaItem* fim;
     int len;
-}PedidoFila;
+}filaPedido;
 
-void add_fila_pedido(PedidoFila* fila, Pedido* pedido);
-Pedido* remove_file_pedido(PedidoFila* fila);
-void imprimir_fila(PedidoFila* fila);
+void add_fila_pedido(filaPedido* fila, Pedido* pedido);
+Pedido* remove_file_pedido(filaPedido* fila);
+void imprimir_fila(filaPedido* fila);
 #endif
