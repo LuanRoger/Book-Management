@@ -1,5 +1,3 @@
-#include "../Generators/id_generator.h"
-
 #ifndef ENCOMENDA_H
 #define ENCOMENDA_H
 
@@ -10,6 +8,6 @@ typedef struct Encomenda{
     char *descricao;
 }Encomenda;
 
-Encomenda* criar_encomenda(char *nome_aluno, char *matricula, char *descricao);
+Encomenda* criar_encomenda(int id, char *nome_aluno, char *matricula, char *descricao);
 void deletar_encomenda(Encomenda* encomenda);
 #endif

@@ -7,7 +7,7 @@
 #include "Users/user_verification.h"
 #include "Data-structures/list.h"
 #include "Data-structures/queue.h"
-
+#include "Data-structures/bst.h"
 
 int main(){
 
@@ -19,8 +19,6 @@ int main(){
     Usuario* user6 = criar_usuario("Caio Finotti Bosco", "133.015.753-23", "1834", 2);
     Usuario* user7 = criar_usuario("Joao Augusto Nogueira de Sousa", "309.345.223-67", "0000", 2);
     Usuario* user8 = criar_usuario("Avallos Marinho de Oliveira", "012.303.223-70", "9494", 2);
-
-
     
     
     ListaUsuario* listaUsers = malloc(sizeof(ListaUsuario));
@@ -32,6 +30,16 @@ int main(){
     addListaUsuario(listaUsers, user6);
     addListaUsuario(listaUsers, user7);
     addListaUsuario(listaUsers, user8);
+    
+    BSTEncomendas* bst = malloc(sizeof(BSTEncomendas));
+    addNode(bst, criar_encomenda(10, "Roger", "517173", "Ronaldo"));
+    addNode(bst, criar_encomenda(5, "Vini", "23423", "Des"));
+    addNode(bst, criar_encomenda(3, "Ronaldo", "123456", "Melhor"));
+    addNode(bst, criar_encomenda(8, "File", "123456", "asdaf"));
+    addNode(bst, criar_encomenda(13, "Titu", "098765", "Description"));
+    addNode(bst, criar_encomenda(11, "Pele", "609013", "Fifu"));
+
+    removeNode(bst, 8);
 
     int resp = -1;
     while(resp != 0){
@@ -78,7 +86,7 @@ int main(){
         //     printf("\n");
    
         } else if(resp == 4){
-            imprimir_lista(listaUsers);
+            PrintInOrder(bst->root);
             break;
         }
         /*if(resp == 1){
