@@ -2,9 +2,11 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdbool.h>
-#include "../Data-structures/list.h"
+#include "../Data-structures/list_usuario.h"
 #ifndef VERIFICATION_H
 #define VERIFICATION_H
+#define CARGO_SECRETARIO 1
+#define CARGO_TRANSPORTADOR 2
 
 typedef struct pessoa{
     char nome[50];
@@ -14,7 +16,7 @@ typedef struct pessoa{
 
 }Pessoa;
 
-int verification_s(ListaUsuario* list);
-int verification_t(ListaUsuario* list);
-
+Usuario* VerificationPassword(ListaUsuario* list);
+int VerificationCargo(Usuario* user, int cargo);
+void Verify(ListaUsuario* list, int choice_cargo);
 #endif
