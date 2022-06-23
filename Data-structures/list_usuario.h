@@ -14,7 +14,7 @@ typedef struct ListaUsuario{
     int len;  
 }ListaUsuario;
 
-void addListaUsuario(ListaUsuario* list, Usuario* usuario);
-void imprimir_lista(ListaUsuario* list);
+void AddListUsuario(ListaUsuario* list, Usuario* usuario);
+void ImprimirLista(ListaUsuario* list);
 
 #endif

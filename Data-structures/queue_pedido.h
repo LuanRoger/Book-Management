@@ -16,7 +16,7 @@ typedef struct filaPedido{
     int len;
 }filaPedido;
 
-void add_fila_pedido(filaPedido* fila, Pedido* pedido);
-Pedido* remove_file_pedido(filaPedido* fila);
-void imprimir_fila(filaPedido* fila);
+void AddFilaPedido(filaPedido* fila, Pedido* pedido);
+Pedido* RemoveFilaPedido(filaPedido* fila);
+void ImprimirFila(filaPedido* fila);
 #endif

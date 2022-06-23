@@ -14,5 +14,5 @@ Usuario *CriarUsuario(char *nome_usuario, char *cpf, char *senha, int cargo){
 void DeleteUsuario(Usuario* usuario) {
     free(usuario->nome);
     free(usuario->cpf);
-    freae(usuario->senha);
+    free(usuario->senha);
 }

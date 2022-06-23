@@ -1,6 +1,6 @@
 #include "list_usuario.h"
 
-void addListaUsuario(ListaUsuario* list, Usuario* usuario){
+void AddListUsuario(ListaUsuario* list, Usuario* usuario){
 
     ItemListUsuario* novoItem = malloc(sizeof(ItemListUsuario));
     novoItem->valor = usuario;
@@ -19,7 +19,7 @@ void addListaUsuario(ListaUsuario* list, Usuario* usuario){
     list->len++;
 }
 
-void imprimir_lista(ListaUsuario* list){
+void ImprimirLista(ListaUsuario* list){
     ItemListUsuario* aux = list->inicio;
     for(int i = 0; i < list->len; i++){
         printf("Nome: %s\n", aux->valor->nome);

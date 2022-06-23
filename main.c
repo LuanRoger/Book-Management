@@ -23,13 +23,13 @@ int main(){
     
     
     ListaUsuario* listaUsers = malloc(sizeof(ListaUsuario));
-    addListaUsuario(listaUsers, user1);
-    addListaUsuario(listaUsers, user2);
-    addListaUsuario(listaUsers, user3);
-    addListaUsuario(listaUsers, user4);
-    addListaUsuario(listaUsers, user5);
-    addListaUsuario(listaUsers, user6);
-    addListaUsuario(listaUsers, user7);
+    AddListUsuario(listaUsers, user1);
+    AddListUsuario(listaUsers, user2);
+    AddListUsuario(listaUsers, user3);
+    AddListUsuario(listaUsers, user4);
+    AddListUsuario(listaUsers, user5);
+    AddListUsuario(listaUsers, user6);
+    AddListUsuario(listaUsers, user7);
 
     BSTEncomendas* bst = malloc(sizeof(BSTEncomendas));
     AddNode(bst, CriarEncomenda(10, "Roger", "517173", "Ronaldo"));
