@@ -10,13 +10,13 @@ typedef struct FilaItem{
     
     struct FilaItem* prox;
 }FilaItem;
-typedef struct filaPedido{
+typedef struct FilaPedido{
     FilaItem* inicio;
     FilaItem* fim;
     int len;
-}filaPedido;
+}FilaPedido;
 
-void AddFilaPedido(filaPedido* fila, Pedido* pedido);
-Pedido* RemoveFilaPedido(filaPedido* fila);
-void ImprimirFila(filaPedido* fila);
+void AddFilaPedido(FilaPedido* fila, Pedido* pedido);
+Pedido* RemoveFilaPedido(FilaPedido* fila);
+void ImprimirFila(FilaPedido* fila);
 #endif
