@@ -1,26 +1,26 @@
 #include "bst.h"
 #include <stdio.h>
 
-BSTEncomendaNode* searchNode(BSTEncomendaNode *aux, int id)
+BSTEncomendaNode* searchNode(BSTEncomendaNode* node, int id)
 {
-  if (aux == NULL)
+  if (node == NULL)
     return NULL;
 
-  if (aux->valor->id == id)
-    return aux;
-  else if (aux->valor->id > id)
+  if (node->valor->id == id)
+    return node;
+  else if (node->valor->id > id)
   {
-    if (aux->left != NULL)
-      return searchNode(aux->left, id);
+    if (node->left != NULL)
+      return searchNode(node->left, id);
     else
-      return aux;
+      return node;
   }
-  else if (aux->valor->id < id)
+  else if (node->valor->id < id)
   {
-    if (aux->right != NULL)
-      return searchNode(aux->right, id);
+    if (node->right != NULL)
+      return searchNode(node->right, id);
     else
-      return aux;
+      return node;
   }
 
   return NULL;
@@ -71,12 +71,20 @@ BSTEncomendaNode* gotoHigher(BSTEncomendaNode* start)
 
   return aux;
 }
-void removeNode(BSTEncomendas* aux, int id)
+BSTEncomendaNode* removeNode(BSTEncomendas* node, int id)
 {
-  BSTEncomendaNode* toRemove = searchNode(aux->root, id);
-  BSTEncomendaNode* dad = searchDad(aux, id);
+  BSTEncomendaNode* toRemove = searchNode(node->root, id);
+  BSTEncomendaNode* dad = toRemove->valor->id != node->root->valor->id ? searchDad(node, id) : NULL;
 
-  if (toRemove->right == NULL && toRemove->left == NULL)
+  if(dad == NULL) {
+    BSTEncomendaNode* temp = gotoHigher(toRemove->right);
+    temp = removeNode(node, temp->valor->id);
+    temp->left = toRemove->left;
+    temp->right = toRemove->right;
+
+    node->root = temp;
+  }
+  else if (toRemove->right == NULL && toRemove->left == NULL)
   {
     if (dad->right == toRemove)
       dad->right = NULL;
@@ -106,36 +114,40 @@ void removeNode(BSTEncomendas* aux, int id)
     higher->left = toRemove->left != higher ? toRemove->left : NULL;
   }
 
-  free(toRemove);
+  return toRemove;
+}
+void deleteNode(BSTEncomendaNode* node) {
+  deletar_encomenda(node->valor);
+  free(node);
 }
 
-void printPreOrder(BSTEncomendaNode* aux)
+void printPreOrder(BSTEncomendaNode* node)
 {
-  printf("%d\n", aux->valor->id);
+  printf("%d\n", node->valor->id);
 
-  if (aux->left != NULL)
-    printPreOrder(aux->left);
-  if (aux->right != NULL)
-    printPreOrder(aux->right);
+  if (node->left != NULL)
+    printPreOrder(node->left);
+  if (node->right != NULL)
+    printPreOrder(node->right);
 }
 
-void PrintInOrder(BSTEncomendaNode *aux)
+void PrintInOrder(BSTEncomendaNode *node)
 {
-  if (aux->left != NULL)
-    PrintInOrder(aux->left);
+  if (node->left != NULL)
+    PrintInOrder(node->left);
 
-  printf("%d\n", aux->valor->id);
+  printf("%d\n", node->valor->id);
 
-  if (aux->right != NULL)
-    PrintInOrder(aux->right);
+  if (node->right != NULL)
+    PrintInOrder(node->right);
 }
 
-void PrintPosOrder(BSTEncomendaNode *aux)
+void PrintPosOrder(BSTEncomendaNode *node)
 {
-  if (aux->left != NULL)
-    PrintPosOrder(aux->left);
-  if (aux->right != NULL)
-    PrintPosOrder(aux->right);
+  if (node->left != NULL)
+    PrintPosOrder(node->left);
+  if (node->right != NULL)
+    PrintPosOrder(node->right);
 
-  printf("%d\n", aux->valor->id);
+  printf("%d\n", node->valor->id);
 }

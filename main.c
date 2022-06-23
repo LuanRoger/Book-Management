@@ -39,7 +39,7 @@ int main(){
     addNode(bst, criar_encomenda(13, "Titu", "098765", "Description"));
     addNode(bst, criar_encomenda(11, "Pele", "609013", "Fifu"));
 
-    removeNode(bst, 8);
+    
 
     int resp = -1;
     while(resp != 0){
@@ -86,7 +86,7 @@ int main(){
         //     printf("\n");
    
         } else if(resp == 4){
-            PrintInOrder(bst->root);
+            printPreOrder(bst->root);
             break;
         }
         /*if(resp == 1){
