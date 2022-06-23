@@ -8,6 +8,6 @@ typedef struct Encomenda{
     char *descricao;
 }Encomenda;
 
-Encomenda* criar_encomenda(int id, char *nome_aluno, char *matricula, char *descricao);
-void deletar_encomenda(Encomenda* encomenda);
+Encomenda* CriarEncomenda(int id, char *nome_aluno, char *matricula, char *descricao);
+void DeletarEncomenda(Encomenda* encomenda);
 #endif

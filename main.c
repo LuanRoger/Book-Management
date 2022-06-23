@@ -5,20 +5,21 @@
 #include "Models/pedido.h"
 #include "Models/usuario.h"
 #include "Users/user_verification.h"
-#include "Data-structures/list.h"
-#include "Data-structures/queue.h"
-#include "Data-structures/bst.h"
+#include "Data-structures/list_usuario.h"
+#include "Data-structures/queue_pedido.h"
+#include "Data-structures/bst_encomenda.h"
+#include "Generators/id_generator.h"
 
 int main(){
 
-    Usuario* user1 = criar_usuario("Vinicius de Oliviera Costa", "814.587.813-64", "1234", 1);
-    Usuario* user2 = criar_usuario("Luan Roger dos Santos Clementino", "342.024.603-08", "4002", 1);
-    Usuario* user3 = criar_usuario("Tatiane Fernandes Figueiredo", "832.612.816-08", "1530", 1);
-    Usuario* user4 = criar_usuario("Joao Augusto Silva Ferreira", "334.321.043-91", "1337", 2);
-    Usuario* user5 = criar_usuario("Kaua Magalhaes Paraizo", "583.056.943-48", "2207", 2);
-    Usuario* user6 = criar_usuario("Caio Finotti Bosco", "133.015.753-23", "1834", 2);
-    Usuario* user7 = criar_usuario("Joao Augusto Nogueira de Sousa", "309.345.223-67", "0000", 2);
-    Usuario* user8 = criar_usuario("Avallos Marinho de Oliveira", "012.303.223-70", "9494", 2);
+    Usuario* user1 = CriarUsuario("Vinicius de Oliviera Costa", "814.587.813-64", "1234", 1);
+    Usuario* user2 = CriarUsuario("Luan Roger dos Santos Clementino", "342.024.603-08", "4002", 1);
+    Usuario* user3 = CriarUsuario("Tatiane Fernandes Figueiredo", "832.612.816-08", "1530", 1);
+    Usuario* user4 = CriarUsuario("Joao Augusto Silva Ferreira", "334.321.043-91", "1337", 2);
+    Usuario* user5 = CriarUsuario("Kaua Magalhaes Paraizo", "583.056.943-48", "2207", 2);
+    Usuario* user6 = CriarUsuario("Caio Finotti Bosco", "133.015.753-23", "1834", 2);
+    Usuario* user7 = CriarUsuario("Joao Augusto Nogueira de Sousa", "309.345.223-67", "0000", 2);
+    Usuario* user8 = CriarUsuario("Avallos Marinho de Oliveira", "012.303.223-70", "9494", 2);
     
     
     ListaUsuario* listaUsers = malloc(sizeof(ListaUsuario));
@@ -29,16 +30,14 @@ int main(){
     addListaUsuario(listaUsers, user5);
     addListaUsuario(listaUsers, user6);
     addListaUsuario(listaUsers, user7);
-    addListaUsuario(listaUsers, user8);
-    
-    BSTEncomendas* bst = malloc(sizeof(BSTEncomendas));
-    addNode(bst, criar_encomenda(10, "Roger", "517173", "Ronaldo"));
-    addNode(bst, criar_encomenda(5, "Vini", "23423", "Des"));
-    addNode(bst, criar_encomenda(3, "Ronaldo", "123456", "Melhor"));
-    addNode(bst, criar_encomenda(8, "File", "123456", "asdaf"));
-    addNode(bst, criar_encomenda(13, "Titu", "098765", "Description"));
-    addNode(bst, criar_encomenda(11, "Pele", "609013", "Fifu"));
 
+    BSTEncomendas* bst = malloc(sizeof(BSTEncomendas));
+    AddNode(bst, CriarEncomenda(10, "Roger", "517173", "Ronaldo"));
+    AddNode(bst, CriarEncomenda(8, "Vini", "23423", "Des"));
+    AddNode(bst, CriarEncomenda(5, "Ronaldo", "123456", "Melhor"));
+    AddNode(bst, CriarEncomenda(10, "File", "123456", "asdaf"));
+    AddNode(bst, CriarEncomenda(13, "Titu", "098765", "Description"));
+    AddNode(bst, CriarEncomenda(11, "Pele", "609013", "Fifu"));
     
 
     int resp = -1;
@@ -86,7 +85,7 @@ int main(){
         //     printf("\n");
    
         } else if(resp == 4){
-            printPreOrder(bst->root);
+            PrintPreOrder(bst->root);
             break;
         }
         /*if(resp == 1){
