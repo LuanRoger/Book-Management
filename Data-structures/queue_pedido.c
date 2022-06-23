@@ -1,7 +1,6 @@
-#include "queue.h"
+#include "queue_pedido.h"
 
-
-void add_fila_pedido(filaPedido* fila, Pedido* pedido){
+void AddFilaPedido(filaPedido* fila, Pedido* pedido){
     FilaItem* novoItem = malloc(sizeof(FilaItem));
     novoItem->valor = pedido;
     novoItem->prox = NULL;
@@ -30,7 +29,7 @@ void add_fila_pedido(filaPedido* fila, Pedido* pedido){
     fila->len++;
 }
 
-Pedido* remove_file_pedido(filaPedido* fila) {
+Pedido* RemoveFilaPedido(filaPedido* fila) {
     FilaItem* lixo = fila->inicio;
     if(lixo->prox != NULL)
         fila->inicio = lixo->prox;
@@ -40,7 +39,7 @@ Pedido* remove_file_pedido(filaPedido* fila) {
     return isolated_pedido;
 }
 
-void imprimir_fila(filaPedido* fila) {
+void ImprimirFila(filaPedido* fila) {
     FilaItem* aux = fila->inicio;
     for(int i = 0; i < fila->len; i++){
         printf("ID: %d\n", aux->valor->info_encomenda->id);

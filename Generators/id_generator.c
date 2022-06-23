@@ -1,21 +1,11 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
 #include "id_generator.h"
-#include "../Models/encomenda.h"
 
-// int id_generator(){
-//     int id;
-//     extern Encomenda *root;
+int id_generator(BSTEncomendas* bst) {
+    int id = 5000;
+    srand(time(NULL));
     
-//     srand(time(NULL));
-    
-//     if(root == NULL){
-//         id = 5000;
-//     }else{
-//         id = rand() % 9999;   
+    if(bst->root != NULL)
+        id = rand() % 9999;
 
-//     }
-
-//     return id;
-// }
+    return id;
+}

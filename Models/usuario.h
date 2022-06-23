@@ -8,6 +8,7 @@ typedef struct Usuario{
     int cargo;
 } Usuario;
 
-Usuario *criar_usuario(char *nome_usuario, char *cpf, char *senha, int cargo);
+Usuario *CriarUsuario(char *nome_usuario, char *cpf, char *senha, int cargo);
+void DeleteUsuario(Usuario* usuario);
 
 #endif
