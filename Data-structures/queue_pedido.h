@@ -3,8 +3,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#ifndef QUEUE_H
-#define QUEUE_H
+#ifndef QUEUE_PEDIDO_H
+#define QUEUE_PEDIDO_H
 typedef struct FilaItem{
     Pedido* valor;
     

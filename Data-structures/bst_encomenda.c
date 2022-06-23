@@ -1,7 +1,6 @@
-#include "bst.h"
-#include <stdio.h>
+#include "bst_encomenda.h"
 
-BSTEncomendaNode* searchNode(BSTEncomendaNode* node, int id)
+BSTEncomendaNode* SearchNode(BSTEncomendaNode* node, int id)
 {
   if (node == NULL)
     return NULL;
@@ -11,14 +10,14 @@ BSTEncomendaNode* searchNode(BSTEncomendaNode* node, int id)
   else if (node->valor->id > id)
   {
     if (node->left != NULL)
-      return searchNode(node->left, id);
+      return SearchNode(node->left, id);
     else
       return node;
   }
   else if (node->valor->id < id)
   {
     if (node->right != NULL)
-      return searchNode(node->right, id);
+      return SearchNode(node->right, id);
     else
       return node;
   }
@@ -26,9 +25,9 @@ BSTEncomendaNode* searchNode(BSTEncomendaNode* node, int id)
   return NULL;
 }
 
-void addNode(BSTEncomendas* bst, Encomenda* encomenda)
+void AddNode(BSTEncomendas* bst, Encomenda* encomenda)
 {
-    BSTEncomendaNode* aux = searchNode(bst->root, encomenda->id);
+    BSTEncomendaNode* aux = SearchNode(bst->root, encomenda->id);
     if (aux != NULL && aux->valor->id == encomenda->id) return;
 
     BSTEncomendaNode* novo = malloc(sizeof(BSTEncomendaNode));
@@ -46,7 +45,7 @@ void addNode(BSTEncomendas* bst, Encomenda* encomenda)
         aux->right = novo;
     }
 }
-BSTEncomendaNode* searchDad(BSTEncomendas* bst, int id)
+BSTEncomendaNode* SearchDad(BSTEncomendas* bst, int id)
 {
   BSTEncomendaNode *aux = bst->root;
   while (aux->left != NULL && aux->right != NULL)
@@ -63,7 +62,7 @@ BSTEncomendaNode* searchDad(BSTEncomendas* bst, int id)
 
   return aux;
 }
-BSTEncomendaNode* gotoHigher(BSTEncomendaNode* start)
+BSTEncomendaNode* GotoHigher(BSTEncomendaNode* start)
 {
   BSTEncomendaNode* aux = start;
   while (aux->left != NULL)
@@ -71,14 +70,14 @@ BSTEncomendaNode* gotoHigher(BSTEncomendaNode* start)
 
   return aux;
 }
-BSTEncomendaNode* removeNode(BSTEncomendas* node, int id)
+BSTEncomendaNode* RemoveNode(BSTEncomendas* node, int id)
 {
-  BSTEncomendaNode* toRemove = searchNode(node->root, id);
-  BSTEncomendaNode* dad = toRemove->valor->id != node->root->valor->id ? searchDad(node, id) : NULL;
+  BSTEncomendaNode* toRemove = SearchNode(node->root, id);
+  BSTEncomendaNode* dad = toRemove->valor->id != node->root->valor->id ? SearchDad(node, id) : NULL;
 
   if(dad == NULL) {
-    BSTEncomendaNode* temp = gotoHigher(toRemove->right);
-    temp = removeNode(node, temp->valor->id);
+    BSTEncomendaNode* temp = GotoHigher(toRemove->right);
+    temp = RemoveNode(node, temp->valor->id);
     temp->left = toRemove->left;
     temp->right = toRemove->right;
 
@@ -103,7 +102,7 @@ BSTEncomendaNode* removeNode(BSTEncomendas* node, int id)
   }
   else if (toRemove->right != NULL && toRemove->left != NULL)
   {
-    BSTEncomendaNode* higher = gotoHigher(toRemove->right);
+    BSTEncomendaNode* higher = GotoHigher(toRemove->right);
 
     if (dad->left == toRemove)
       dad->left = higher;
@@ -116,19 +115,19 @@ BSTEncomendaNode* removeNode(BSTEncomendas* node, int id)
 
   return toRemove;
 }
-void deleteNode(BSTEncomendaNode* node) {
+void DeleteNode(BSTEncomendaNode* node) {
   deletar_encomenda(node->valor);
   free(node);
 }
 
-void printPreOrder(BSTEncomendaNode* node)
+void PrintPreOrder(BSTEncomendaNode* node)
 {
   printf("%d\n", node->valor->id);
 
   if (node->left != NULL)
-    printPreOrder(node->left);
+    PrintPreOrder(node->left);
   if (node->right != NULL)
-    printPreOrder(node->right);
+    PrintPreOrder(node->right);
 }
 
 void PrintInOrder(BSTEncomendaNode *node)

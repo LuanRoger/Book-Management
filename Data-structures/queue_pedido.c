@@ -1,5 +1,4 @@
-#include "queue.h"
-
+#include "queue_pedido.h"
 
 void add_fila_pedido(filaPedido* fila, Pedido* pedido){
     FilaItem* novoItem = malloc(sizeof(FilaItem));
