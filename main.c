@@ -12,6 +12,7 @@
 #include "Workflows/cadastrar_pedido_workflow.h"
 #include "Workflows/cadastrar_encomenda_workflow.h"
 
+
 int main(){
     Usuario* user1 = CriarUsuario("Vinicius de Oliviera Costa", "814.587.813-64", "1234", 1);
     Usuario* user2 = CriarUsuario("Luan Roger dos Santos Clementino", "342.024.603-08", "4002", 1);
@@ -31,6 +32,7 @@ int main(){
     AddListUsuario(listaUsers, user5);
     AddListUsuario(listaUsers, user6);
     AddListUsuario(listaUsers, user7);
+    AddListUsuario(listaUsers, user8);
 
     BSTEncomendas* bst = malloc(sizeof(BSTEncomendas));
 
