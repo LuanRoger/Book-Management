@@ -42,7 +42,7 @@ int main(){
 
     int resp = -1;
     while(resp != 0){
-        system("clear");
+        
         printf("\n\tBOOK MANAGEMENT\n");
         printf("[1] - Encomendar um livro.\n");
         printf("[2] - Remover uma encomenda de livro.\n");
@@ -87,6 +87,13 @@ int main(){
         } else if(resp == 4){
             PrintPreOrder(bst->root);
             break;
+        } else if(resp == 5){
+            
+            if(verification_s(listaUsers) == 1){
+                printf("LOGIN EFETUADO!\n");
+            }else{
+                printf("LOGIN E/OU SENHA INCORRETOS!\n");
+            }
         }
         /*if(resp == 1){
             //encomendar um livro
