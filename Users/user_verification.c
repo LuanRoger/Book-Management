@@ -1,38 +1,51 @@
 #include "user_verification.h"
-#include <stdio.h>
-#include <string.h>
-#include <stdio.h>
-#include <stdbool.h>
 
 
-int verification(){
-    
-    Pessoa Pessoas[10];
-    char login[20];
+
+int verification(ListaUsuario* list){
+    ItemListUsuario* aux = list->inicio;
+    char cpf[20];
     char senha[10];
-
-    strcpy(Pessoas[0].nome, "VINICIUS DE OLIVEIRA COSTA");
-    strcpy(Pessoas[0].login, "vinicius");
-    strcpy(Pessoas[0].senha, "1234");
-    strcpy(Pessoas[0].cargo, "ST");
-    
-    strcpy(Pessoas[1].nome, "LUAN ROGER DOS SANTOS CLEMENTINO");
-    strcpy(Pessoas[1].login, "roger");
-    strcpy(Pessoas[1].senha, "1234");
-    strcpy(Pessoas[1].cargo, "TD");
+    int cargo;
 
 
     printf("LOGIN: ");
-    scanf(" %s", login);
+    scanf(" %s", cpf);
 
     printf("SENHA: ");
     scanf(" %s", senha);
 
-    for(int i = 0; i < 10; i++){
+    for(int i = 0; i < list->len; i++){
         
-        if((strcmp(login, Pessoas[i].login) == 0) && (strcmp(senha, Pessoas[i].senha) == 0)){
+        if((strcmp(aux->valor->cpf, cpf) == 0) && (strcmp(aux->valor->senha, senha) == 0)){
+            
+            return 1;
+        }
+        aux = aux->prox;   
+    }
+
+    return 0;
+}
+
+int verification_t(ListaUsuario* list){
+    ItemListUsuario* aux = list->inicio;
+    char cpf[20];
+    char senha[10];
+    int cargo;
+
+
+    printf("LOGIN: ");
+    scanf(" %s", cpf);
+
+    printf("SENHA: ");
+    scanf(" %s", senha);
+
+    for(int i = 0; i < list->len; i++){
+        
+        if((strcmp(aux->valor->cpf, cpf) == 0) && (strcmp(aux->valor->senha, senha) == 0) && aux->valor->cargo == 2){
             return 1;
         }   
+        aux = aux->prox;
     }
 
     return 0;

@@ -11,10 +11,10 @@
 
 int main(){
 
-    Usuario* user1 = criar_usuario("Vinicius de Oliviera Costa", "814.587.813-64", "1234", 1);
+    Usuario* user1 = criar_usuario("Vinicius de Oliviera Costa", "12", "1234", 1);
     Usuario* user2 = criar_usuario("Luan Roger dos Santos Clementino", "342.024.603-08", "4002", 1);
     Usuario* user3 = criar_usuario("Tatiane Fernandes Figueiredo", "832.612.816-08", "1530", 1);
-    Usuario* user4 = criar_usuario("Joao Augusto Silva Ferreira", "334.321.043-91", "1337", 2);
+    Usuario* user4 = criar_usuario("Joao Augusto Silva Ferreira", "123", "1337", 2);
     Usuario* user5 = criar_usuario("Kaua Magalhaes Paraizo", "583.056.943-48", "2207", 2);
     Usuario* user6 = criar_usuario("Caio Finotti Bosco", "133.015.753-23", "1834", 2);
     Usuario* user7 = criar_usuario("Joao Augusto Nogueira de Sousa", "309.345.223-67", "0000", 2);
@@ -43,7 +43,7 @@ int main(){
 
     int resp = -1;
     while(resp != 0){
-        system("clear");
+        
         printf("\n\tBOOK MANAGEMENT\n");
         printf("[1] - Encomendar um livro.\n");
         printf("[2] - Remover uma encomenda de livro.\n");
@@ -88,6 +88,13 @@ int main(){
         } else if(resp == 4){
             PrintInOrder(bst->root);
             break;
+        } else if(resp == 5){
+            
+            if(verification_s(listaUsers) == 1){
+                printf("LOGIN EFETUADO!\n");
+            }else{
+                printf("LOGIN E/OU SENHA INCORRETOS!\n");
+            }
         }
         /*if(resp == 1){
             //encomendar um livro

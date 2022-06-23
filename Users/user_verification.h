@@ -1,8 +1,10 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdio.h>
+#include <stdbool.h>
+#include "../Data-structures/list.h"
 #ifndef VERIFICATION_H
 #define VERIFICATION_H
-
-#include <stdbool.h>
-
 
 typedef struct pessoa{
     char nome[50];
@@ -12,6 +14,7 @@ typedef struct pessoa{
 
 }Pessoa;
 
-int verification();
+int verification_s(ListaUsuario* list);
+int verification_t(ListaUsuario* list);
 
 #endif
