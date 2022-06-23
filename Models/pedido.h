@@ -12,11 +12,7 @@ typedef struct Pedido {
     int prioridade;
 }Pedido;
 
-Pedido* criar_pedido(Encomenda* info_encomenda,
-    char* campus_livro,
-    char* campus_aluno,
-    char* responsavel_encomenda,
-    int prioridade);
-void deletar_pedido(Pedido* pedido);
+Pedido* CriarPedido(Encomenda* info_encomenda, char* campus_livro, char* campus_aluno, char* responsavel_encomenda, int prioridade);
+void DeletePedido(Pedido* pedido);
 
 #endif

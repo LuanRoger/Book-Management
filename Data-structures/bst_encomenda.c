@@ -116,7 +116,7 @@ BSTEncomendaNode* RemoveNode(BSTEncomendas* node, int id)
   return toRemove;
 }
 void DeleteNode(BSTEncomendaNode* node) {
-  deletar_encomenda(node->valor);
+  DeletarEncomenda(node->valor);
   free(node);
 }
 
