@@ -9,18 +9,19 @@
 #include "Data-structures/queue_pedido.h"
 #include "Data-structures/bst_encomenda.h"
 #include "Generators/id_generator.h"
+#include "Workflows/cadastrar_pedido_workflow.h"
+#include "Workflows/cadastrar_encomenda_workflow.h"
 
 
 int main(){
-
-    Usuario* user1 = CriarUsuario("Vinicius de Oliviera Costa", "90459959301", "1234", 2);
-    Usuario* user2 = CriarUsuario("Luan Roger dos Santos Clementino", "34202460308", "4002", 1);
-    Usuario* user3 = CriarUsuario("Tatiane Fernandes Figueiredo", "83261281608", "1530", 1);
-    Usuario* user4 = CriarUsuario("Joao Augusto Silva Ferreira", "33432104391", "1337", 2);
-    Usuario* user5 = CriarUsuario("Kaua Magalhaes Paraizo", "58305694348", "2207", 2);
-    Usuario* user6 = CriarUsuario("Caio Finotti Bosco", "13301575323", "1834", 2);
-    Usuario* user7 = CriarUsuario("Joao Augusto Nogueira de Sousa", "30934522367", "0000", 2);
-    Usuario* user8 = CriarUsuario("Avallos Marinho de Oliveira", "01230322370", "9494", 2);
+    Usuario* user1 = CriarUsuario("Vinicius de Oliviera Costa", "814.587.813-64", "1234", 1);
+    Usuario* user2 = CriarUsuario("Luan Roger dos Santos Clementino", "342.024.603-08", "4002", 1);
+    Usuario* user3 = CriarUsuario("Tatiane Fernandes Figueiredo", "832.612.816-08", "1530", 1);
+    Usuario* user4 = CriarUsuario("Joao Augusto Silva Ferreira", "334.321.043-91", "1337", 2);
+    Usuario* user5 = CriarUsuario("Kaua Magalhaes Paraizo", "583.056.943-48", "2207", 2);
+    Usuario* user6 = CriarUsuario("Caio Finotti Bosco", "133.015.753-23", "1834", 2);
+    Usuario* user7 = CriarUsuario("Joao Augusto Nogueira de Sousa", "309.345.223-67", "0000", 2);
+    Usuario* user8 = CriarUsuario("Avallos Marinho de Oliveira", "012.303.223-70", "9494", 2);
     
     
     ListaUsuario* listaUsers = malloc(sizeof(ListaUsuario));
@@ -34,66 +35,37 @@ int main(){
     AddListUsuario(listaUsers, user8);
 
     BSTEncomendas* bst = malloc(sizeof(BSTEncomendas));
-    AddNode(bst, CriarEncomenda(10, "Roger", "517173", "Ronaldo"));
-    AddNode(bst, CriarEncomenda(8, "Vini", "23423", "Des"));
-    AddNode(bst, CriarEncomenda(5, "Ronaldo", "123456", "Melhor"));
-    AddNode(bst, CriarEncomenda(10, "File", "123456", "asdaf"));
-    AddNode(bst, CriarEncomenda(13, "Titu", "098765", "Description"));
-    AddNode(bst, CriarEncomenda(11, "Pele", "609013", "Fifu"));
-    
+
+    FilaPedido* filaPedido = malloc(sizeof(FilaPedido));
 
     int resp = -1;
     while(resp != 0){
         
         printf("\n\tBOOK MANAGEMENT\n");
         printf("[1] - Encomendar um livro.\n");
-        printf("[2] - Remover uma encomenda de livro.\n");
-        printf("[3] - Remover um pedido de livro.\n");
+        printf("[2] - Cadastrar pedido.\n");
+        printf("[3] - Remover pedido.\n");
+        printf("[4] - Exibir encomendas.\n");
+        printf("[5] - Exibir pedidos.\n");
         printf("[0] - Sair do sistema!\n");
         printf("\nDigite a funcionalidade desejada: ");
         scanf("%d", &resp);
 
         if(resp == 1){
+            AddNode(bst, CadastrarEncomendaWorkflow(id_generator(bst)));
+        }
+        else if(resp == 2) {
+            PrintInOrder(bst->root);
+            AddFilaPedido(filaPedido, CadastrarPedidoWorkflow(bst));
+        }
+        else if(resp == 3) {
 
-            // printf("\nDigite o nome do aluno:\n");
-            // char *nome_aluno = malloc(sizeof(char));
-            // scanf(" %[^\n]s", nome_aluno);
-
-            // printf("\nDigite a matricula:\n");
-            // char *matricula = malloc(sizeof(char));
-            // scanf(" %s", matricula);
-
-            // printf("\nDigite uma descricao:\n");
-            // char *descricao = malloc(sizeof(char));
-            // scanf(" %[^\n]s", descricao);
-
-            // criar_encomenda(nome_aluno, matricula, descricao);
-            
-            sleep(2);
-            
-        // }else if(resp == 2){
-        //     if(root == NULL){
-        //         printf("\nNENHUMA ENCOMENDA CADASTRADA\n");
-        //         sleep(2);
-        //     }else{
-        //         if(verification() == 1){
-        //             printf("\nUSUARIO LOGADO\n");
-        //             sleep(1);
-        //         }else
-        //             printf("\nLOGIN E/OU SENHA INCORRETA\n");
-        //             sleep(1);
-
-        //     }
-        //     printf("\n");
-   
-        } else if(resp == 4){
+        }
+        else if(resp == 4){
             PrintPreOrder(bst->root);
-            break;
+        }
+        else if(resp == 5) {
             
-        } else if(resp == 5){
-            Verify(listaUsers, CARGO_SECRETARIO);
-        }else if(resp == 6){
-            ImprimirLista(listaUsers);
         }
         /*if(resp == 1){
             //encomendar um livro
