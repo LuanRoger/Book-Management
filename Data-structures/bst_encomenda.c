@@ -135,7 +135,12 @@ void PrintInOrder(BSTEncomendaNode *node)
   if (node->left != NULL)
     PrintInOrder(node->left);
 
-  printf("%d\n", node->valor->id);
+  printf("ID: %d\n", node->valor->id);
+  printf("Nome: %s\n", node->valor->nome_aluno);
+  printf("Matricula: %s\n", node->valor->matricula);
+  printf("Descrição: %s\n", node->valor->descricao);
+  printf("\n");
+
 
   if (node->right != NULL)
     PrintInOrder(node->right);

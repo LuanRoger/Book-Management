@@ -39,7 +39,7 @@ Pedido* RemoveFilaPedido(FilaPedido* fila) {
     return isolated_pedido;
 }
 
-void ImprimirFila(FilaPedido* fila) {
+void PrintFila(FilaPedido* fila) {
     FilaItem* aux = fila->inicio;
     for(int i = 0; i < fila->len; i++){
         printf("ID: %d\n", aux->valor->info_encomenda->id);

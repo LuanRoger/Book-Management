@@ -5,7 +5,6 @@ Usuario* VerificationPassword(ListaUsuario* list){
 
     char cpf[20];
     char senha[10];
-    int cargo;
 
     printf("LOGIN: ");
     scanf(" %s", cpf);

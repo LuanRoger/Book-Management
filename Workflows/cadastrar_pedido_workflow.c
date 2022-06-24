@@ -1,6 +1,6 @@
 #include "cadastrar_pedido_workflow.h"
 
-Pedido* CadastrarPedidoWorkflow(BSTEncomendas* bst) {
+Pedido* CadastrarPedidoWorkflow(BSTEncomendas* bst, Usuario* user) {
     int encomendaId;
 
     printf("Digite o ID da encomenda:\n");
@@ -19,11 +19,8 @@ Pedido* CadastrarPedidoWorkflow(BSTEncomendas* bst) {
     printf("Digite o campus do aluno:\n");
     fgets(campus_aluno, BUFFER_STRING_SIZE, stdin);
 
-    printf("Digite o responsavel pela encomenda:\n");
-    fgets(responsavel_encomenda, BUFFER_STRING_SIZE, stdin);
-
     printf("Digite a prioridade:\n");
     scanf("%d%*c", &prioridade);
 
-    return CriarPedido(encomenda->valor, campus_livro, campus_aluno, responsavel_encomenda, prioridade);
+    return CriarPedido(encomenda->valor, campus_livro, campus_aluno, user->nome, prioridade);
 }

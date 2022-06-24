@@ -55,17 +55,25 @@ int main(){
             AddNode(bst, CadastrarEncomendaWorkflow(id_generator(bst)));
         }
         else if(resp == 2) {
+            printf("\nSomente secretários tem acesso\n");
+            
+            Usuario* usuario = VerificationPassword(listaUsers);
+            VerificationCargo(usuario, CARGO_SECRETARIO);
+            
             PrintInOrder(bst->root);
-            AddFilaPedido(filaPedido, CadastrarPedidoWorkflow(bst));
+            AddFilaPedido(filaPedido, CadastrarPedidoWorkflow(bst, usuario));
+            
         }
         else if(resp == 3) {
 
         }
         else if(resp == 4){
-            PrintPreOrder(bst->root);
+            PrintInOrder(bst->root);
+
         }
         else if(resp == 5) {
-            
+            PrintFila(filaPedido);
+
         }
         /*if(resp == 1){
             //encomendar um livro

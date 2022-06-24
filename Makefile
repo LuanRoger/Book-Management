@@ -16,6 +16,8 @@ create:
 comp: $(HEDERS_FILE)
 	gcc -c $(C_FILES)
 
+all: comp create
+
 clean:
 	rm -rf *.o
 	find . -name \*.gch -delete
