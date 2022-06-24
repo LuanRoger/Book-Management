@@ -35,7 +35,6 @@ int main(){
     AddListUsuario(listaUsers, user8);
 
     BSTEncomendas* bst = malloc(sizeof(BSTEncomendas));
-
     FilaPedido* filaPedido = malloc(sizeof(FilaPedido));
 
     int resp = -1;
@@ -52,7 +51,8 @@ int main(){
         scanf("%d", &resp);
 
         if(resp == 1){
-            AddNode(bst, CadastrarEncomendaWorkflow(id_generator(bst)));
+            Encomenda* newEncomenda = CadastrarEncomendaWorkflow(id_generator(bst));
+            AddNode(bst, newEncomenda);
         }
         else if(resp == 2) {
             printf("\nSomente secretários tem acesso\n");
@@ -61,8 +61,11 @@ int main(){
             VerificationCargo(usuario, CARGO_SECRETARIO);
             
             PrintInOrder(bst->root);
-            AddFilaPedido(filaPedido, CadastrarPedidoWorkflow(bst, usuario));
-            
+
+            Pedido* newPedido = CadastrarPedidoWorkflow(bst);
+            if(newPedido == NULL)
+                printf("Esta encomenda não existe.\n");
+            else AddFilaPedido(filaPedido, newPedido);
         }
         else if(resp == 3) {
 

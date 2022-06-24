@@ -1,6 +1,5 @@
 #include "cadastrar_encomenda_workflow.h"
 
-//TODO: Tamanho da frase
 Encomenda* CadastrarEncomendaWorkflow(int id) {
     printf("Digite o nome do aluno:\n");
     char *nome_aluno = malloc(STRING_BUFFER_SIZE);
