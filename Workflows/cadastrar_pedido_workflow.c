@@ -7,6 +7,7 @@ Pedido* CadastrarPedidoWorkflow(BSTEncomendas* bst) {
     scanf("%d%*c", &encomendaId);
 
     BSTEncomendaNode* encomenda = RemoveNode(bst, encomendaId);
+    if(encomenda == NULL) return NULL;
 
     char* campus_livro = malloc(BUFFER_STRING_SIZE);
     char* campus_aluno = malloc(BUFFER_STRING_SIZE);
