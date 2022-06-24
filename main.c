@@ -11,7 +11,7 @@
 #include "Generators/id_generator.h"
 #include "Workflows/cadastrar_pedido_workflow.h"
 #include "Workflows/cadastrar_encomenda_workflow.h"
-
+//TODO: limpar termina depois uma operacao
 
 int main(){
     Usuario* user1 = CriarUsuario("Vinicius de Oliviera Costa", "814.587.813-64", "1234", 1);
@@ -55,68 +55,69 @@ int main(){
             AddNode(bst, newEncomenda);
         }
         else if(resp == 2) {
-            printf("\nSomente secretários tem acesso\n");
-            
-            Usuario* usuario = VerificationPassword(listaUsers);
-            VerificationCargo(usuario, CARGO_SECRETARIO);
-            
-            PrintInOrder(bst->root);
+            if(bst->root != NULL){
+                printf("\nSOMENTE SECRETÁRIOS TEM ACESSO.\n");
+                
+                Usuario* user = VerificationPassword(listaUsers);
+                if(user == NULL){
+                    printf("\nSENHA E/OU USUARIO INCORRETO!\n");
 
-            Pedido* newPedido = CadastrarPedidoWorkflow(bst, usuario);
-            if(newPedido == NULL)
-                printf("Esta encomenda não existe.\n");
-            else AddFilaPedido(filaPedido, newPedido);
+                }else{
+                    if(VerificationCargo(user, CARGO_SECRETARIO) == 0){
+                        PrintInOrder(bst->root);
+
+                        Pedido* newPedido = CadastrarPedidoWorkflow(bst, user);
+                        if(newPedido == NULL)
+                            printf("\nESSA ENCOMENDA NÃO EXISTE!\n");
+                        else AddFilaPedido(filaPedido, newPedido);
+
+                    }else{
+                        printf("\nUSUARIO SEM PERMISSÃO\n");
+                    }
+                    
+                }
+
+            }else{
+                printf("\nNENHUMA ENCOMENDA CADASTRADA!\n");
+            }
+
         }
         else if(resp == 3) {
+            if(filaPedido->len > 0){
+                printf("\nSOMENTE TRANSPORTADORES TEM ACESSO\n");
 
+                Usuario* user = VerificationPassword(listaUsers);
+                if(user == NULL){
+                    printf("\nSENHA E/OU USUARIO INCORRETO!\n");
+
+                }else{
+                    if(VerificationCargo(user, CARGO_TRANSPORTADOR) == 0){
+                        //pode fazer as coisas aqui dentro, encima tem a verificação completa
+
+                    }else{
+                        printf("\nUSUARIO SEM PERMISSÃO\n");
+                    }
+                    
+                }
+
+            }else{
+                printf("\nNENHUM PEDIDO CADASTRADO\n");
+            }
         }
         else if(resp == 4){
-            PrintInOrder(bst->root);
-        }
-        else if(resp == 5) {
-            PrintFila(filaPedido);
-        }
-        /*if(resp == 1){
-            //encomendar um livro
-             printf(" Digite o nome do aluno:\n");
-             char * nome = malloc(sizeof(char));
-             scanf(" %[^\n]s", nome);
-             //... matricula e descricao..
-             //criar um funcao para gerar id unico (:D)
-            //add_abb(id, nome, matricula, descricao);
-        }else if(resp == 2){
-            //remover uma encomenda de livro da ABB (id)
-            //para remover eu preciso:
-            //1 - visualizar as encomendas (in_ordem)
-            in_ordem();
-            //2 - verificar o usuario
-            printf(" Digite seu cpf:\n");
-            char cpf[100];
-            scanf("%s", &cpf);
-            printf(" Digite sua senha:\n");
-            char senha[100];
-            scanf("%s", &senha);
-            //int retorno = verificar(cpf, senha);
-            if(retorno == 1){
-                //3 - chama a funcao remover_abb por id (CADE ESSA FUNCAO?)
-                //4 - setar novos dados (faltando)
-                //5 - add_fila(....);
-            }else if(resp == 3){
-               
-                //2 - verificar o usuario
-                    printf(" Digite seu cpf:\n");
-                    char cpf[100];
-                    scanf("%s", &cpf);
-                    printf(" Digite sua senha:\n");
-                    char senha[100];
-                    scanf("%s", &senha);
-                    //int retorno = verificar(cpf, senha);
-                    if(retorno == 1){
-                        //remover da fila de prioridade
-                    }
+            if(bst->root == NULL){
+                printf("\nNENHUMA ENCOMENDA CADASTRADA\n");
+            }else{
+                PrintInOrder(bst->root);
             }
-        
-        }*/
+        }
+        else if(resp == 5){
+            if(filaPedido->len == 0){
+                printf("\nNENHUM PEDIDO CADASTRADO\n");
+            }else{
+                PrintFila(filaPedido);
+            }
+        }
         
     }
     

@@ -46,8 +46,8 @@ void PrintFila(FilaPedido* fila) {
         printf("Nome do aluno: %s\n", aux->valor->info_encomenda->nome_aluno);
         printf("Matricula do aluno: %s\n", aux->valor->info_encomenda->matricula);
         printf("Descricao %s\n", aux->valor->info_encomenda->descricao);
-        printf("CAMPUS DE SAIDA: %s\n", aux->valor->campus_livro);
-        printf("CAMPUS DE ENTRADA: %s\n", aux->valor->campus_aluno);
+        printf("Campus de saida: %s\n", aux->valor->campus_livro);
+        printf("Campus de entrada: %s\n", aux->valor->campus_aluno);
         printf("Responsavel encomenda: %s\n", aux->valor->responsavel_encomenda);
         printf("Prioridade: %d\n", aux->valor->prioridade);
         printf("\n");

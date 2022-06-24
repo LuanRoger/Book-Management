@@ -20,8 +20,17 @@ Pedido* CadastrarPedidoWorkflow(BSTEncomendas* bst, Usuario* user) {
     printf("Digite o campus do aluno:\n");
     fgets(campus_aluno, BUFFER_STRING_SIZE, stdin);
 
-    printf("Digite a prioridade:\n");
-    scanf("%d%*c", &prioridade);
+    do{
+        printf("Digite a prioridade (0 ~ 100):\n");
+        scanf("%d%*c", &prioridade);
+        if(prioridade < 0 || prioridade > 100){
+            printf("\nPRIORIDADE FORA DOS LIMITES\n");
+
+        }else{
+            break;
+        }
+        
+    }while(1);
 
     return CriarPedido(encomenda->valor, campus_livro, campus_aluno, user->nome, prioridade);
 }
