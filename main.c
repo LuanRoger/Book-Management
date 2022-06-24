@@ -62,7 +62,7 @@ int main(){
             
             PrintInOrder(bst->root);
 
-            Pedido* newPedido = CadastrarPedidoWorkflow(bst);
+            Pedido* newPedido = CadastrarPedidoWorkflow(bst, usuario);
             if(newPedido == NULL)
                 printf("Esta encomenda não existe.\n");
             else AddFilaPedido(filaPedido, newPedido);
@@ -72,11 +72,9 @@ int main(){
         }
         else if(resp == 4){
             PrintInOrder(bst->root);
-
         }
         else if(resp == 5) {
             PrintFila(filaPedido);
-
         }
         /*if(resp == 1){
             //encomendar um livro

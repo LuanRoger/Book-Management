@@ -86,7 +86,7 @@ BSTEncomendaNode* SearchNode(BSTEncomendaNode* node, int id)
       aux = aux->left;
   }
   
-  return NULL;
+  return aux;
 }
 BSTEncomendaNode* SearchDad(BSTEncomendas* bst, int id)
 {
