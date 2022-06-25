@@ -27,6 +27,8 @@ void AddFilaPedido(FilaPedido* fila, Pedido* pedido){
     }
 
     fila->len++;
+    printf("\nPEDIDO CRIADO COM SUCESSO!\n");
+
 }
 
 Pedido* RemoveFilaPedido(FilaPedido* fila) {
@@ -42,14 +44,16 @@ Pedido* RemoveFilaPedido(FilaPedido* fila) {
 void PrintFila(FilaPedido* fila) {
     FilaItem* aux = fila->inicio;
     for(int i = 0; i < fila->len; i++){
-        printf("ID: %d\n", aux->valor->info_encomenda->id);
-        printf("Nome do aluno: %s\n", aux->valor->info_encomenda->nome_aluno);
-        printf("Matricula do aluno: %s\n", aux->valor->info_encomenda->matricula);
-        printf("Descricao %s\n", aux->valor->info_encomenda->descricao);
-        printf("Campus de saida: %s\n", aux->valor->campus_livro);
-        printf("Campus de entrada: %s\n", aux->valor->campus_aluno);
-        printf("Responsavel encomenda: %s\n", aux->valor->responsavel_encomenda);
-        printf("Prioridade: %d\n", aux->valor->prioridade);
+        printf("╔════════════════════════════════════════════════════════════╗\n");
+        printf(" ID: %d\n", aux->valor->info_encomenda->id);
+        printf(" Nome do aluno: %s\n", aux->valor->info_encomenda->nome_aluno);
+        printf(" Matricula do aluno: %s\n", aux->valor->info_encomenda->matricula);
+        printf(" Descrição: %s\n", aux->valor->info_encomenda->descricao);
+        printf(" Campus de saida: %s", aux->valor->campus_livro);
+        printf(" Campus de entrada: %s", aux->valor->campus_aluno);
+        printf(" Responsável: %s\n", aux->valor->responsavel_encomenda);
+        printf(" Prioridade: %d\n", aux->valor->prioridade);
+        printf("╚════════════════════════════════════════════════════════════╝\n");
         printf("\n");
         aux = aux->prox;
     }

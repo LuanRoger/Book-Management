@@ -53,6 +53,7 @@ int main(){
         if(resp == 1) {
             Encomenda* newEncomenda = CadastrarEncomendaWorkflow(id_generator(bst));
             AddNode(bst, newEncomenda);
+            printf("\nENCOMENDA CRIADA COM SUCESSO!\n");
         }
         else if(resp == 2) { //TODO: Create a dedicated workflow
             if(bst->root == NULL)
@@ -104,7 +105,7 @@ int main(){
             if(bst->root == NULL){
                 printf("\nNENHUMA ENCOMENDA CADASTRADA.\n");
             }else{
-                PrintPreOrder(bst->root);
+                PrintInOrder(bst->root);
             }
         }
         else if(resp == 5){

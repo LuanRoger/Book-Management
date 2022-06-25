@@ -84,8 +84,10 @@ BSTEncomendaNode* RemoveNode(BSTEncomendas* bst, int id)
   if(toRemove->valor->id != id) return NULL;
 
   if(dad == NULL) {
-    BSTEncomendaNode* rootSub = GotoSmallest(toRemove->right);
-    if(rootSub == NULL)
+    BSTEncomendaNode* rootSub = NULL;
+    if(toRemove->right != NULL)
+      rootSub = GotoSmallest(toRemove->right);
+    else if(toRemove->left != NULL)
       rootSub = GotoHigher(toRemove->left);
 
     if(rootSub != NULL) {
@@ -94,6 +96,7 @@ BSTEncomendaNode* RemoveNode(BSTEncomendas* bst, int id)
       rootSub->right = toRemove->right;
       bst->root = rootSub;
     }
+    else bst->root = NULL;
   }
   else if (toRemove->right == NULL && toRemove->left == NULL)
   {
@@ -147,10 +150,12 @@ void PrintInOrder(BSTEncomendaNode *node)
   if (node->left != NULL)
     PrintInOrder(node->left);
 
-  printf("ID: %d\n", node->valor->id);
-  printf("Nome: %s\n", node->valor->nome_aluno);
-  printf("Matricula: %s\n", node->valor->matricula);
-  printf("Descrição: %s\n", node->valor->descricao);
+  printf("╔════════════════════════════════════════════════════════════╗\n");
+  printf(" ID: %d\n", node->valor->id);  
+  printf(" Nome: %s\n", node->valor->nome_aluno);
+  printf(" Matricula: %s\n", node->valor->matricula);
+  printf(" Descrição: %s\n", node->valor->descricao);
+  printf("╚════════════════════════════════════════════════════════════╝\n");
   printf("\n");
 
 

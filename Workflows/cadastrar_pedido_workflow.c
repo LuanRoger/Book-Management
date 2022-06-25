@@ -14,14 +14,14 @@ Pedido* CadastrarPedidoWorkflow(BSTEncomendas* bst, Usuario* user) {
     char* responsavel_encomenda = malloc(BUFFER_STRING_SIZE);
     int prioridade;
 
-    printf("Digite o campus do livro:\n");
+    printf("\nDigite o campus do livro:\n");
     fgets(campus_livro, BUFFER_STRING_SIZE, stdin);
     
-    printf("Digite o campus do aluno:\n");
+    printf("\nDigite o campus do aluno:\n");
     fgets(campus_aluno, BUFFER_STRING_SIZE, stdin);
 
     do{
-        printf("Digite a prioridade (0 ~ 100):\n");
+        printf("\nDigite a prioridade (0 ~ 100):\n");
         scanf("%d%*c", &prioridade);
         if(prioridade < 0 || prioridade > 100){
             printf("\nPRIORIDADE FORA DOS LIMITES\n");
