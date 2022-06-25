@@ -50,41 +50,37 @@ int main(){
         printf("\nDigite a funcionalidade desejada: ");
         scanf("%d", &resp);
 
-        if(resp == 1){
+        if(resp == 1) {
             Encomenda* newEncomenda = CadastrarEncomendaWorkflow(id_generator(bst));
             AddNode(bst, newEncomenda);
         }
-        else if(resp == 2) {
-            if(bst->root != NULL){
-                printf("\nSOMENTE SECRETÁRIOS TEM ACESSO.\n");
+        else if(resp == 2) { //TODO: Create a dedicated workflow
+            if(bst->root == NULL)
+                printf("NENHUMA ENCOMENDA CADASTRADA.\n");
+            else {
+                printf("AVISO: SOMENTE SECRETÁRIOS TEM ACESSO.\n");
                 
                 Usuario* user = VerificationPassword(listaUsers);
-                if(user == NULL){
+                if(user == NULL)
                     printf("\nSENHA E/OU USUARIO INCORRETO!\n");
-
-                }else{
-                    if(VerificationCargo(user, CARGO_SECRETARIO) == 0){
+                else {
+                    if(VerificationCargo(user, CARGO_SECRETARIO) != 0)
+                        printf("\nUSUARIO SEM PERMISSÃO\n");
+                    else {
                         PrintInOrder(bst->root);
 
                         Pedido* newPedido = CadastrarPedidoWorkflow(bst, user);
                         if(newPedido == NULL)
                             printf("\nESSA ENCOMENDA NÃO EXISTE!\n");
-                        else AddFilaPedido(filaPedido, newPedido);
-
-                    }else{
-                        printf("\nUSUARIO SEM PERMISSÃO\n");
+                        else 
+                            AddFilaPedido(filaPedido, newPedido);
                     }
-                    
                 }
-
-            }else{
-                printf("\nNENHUMA ENCOMENDA CADASTRADA!\n");
             }
-
         }
-        else if(resp == 3) {
+        else if(resp == 3) { //TODO: Create a dedicated workflow
             if(filaPedido->len > 0){
-                printf("\nSOMENTE TRANSPORTADORES TEM ACESSO\n");
+                printf("AVISO: SOMENTE TRANSPORTADORES TEM ACESSO\n");
 
                 Usuario* user = VerificationPassword(listaUsers);
                 if(user == NULL){
@@ -106,14 +102,14 @@ int main(){
         }
         else if(resp == 4){
             if(bst->root == NULL){
-                printf("\nNENHUMA ENCOMENDA CADASTRADA\n");
+                printf("\nNENHUMA ENCOMENDA CADASTRADA.\n");
             }else{
-                PrintInOrder(bst->root);
+                PrintPreOrder(bst->root);
             }
         }
         else if(resp == 5){
             if(filaPedido->len == 0){
-                printf("\nNENHUM PEDIDO CADASTRADO\n");
+                printf("\nNENHUM PEDIDO CADASTRADO.\n");
             }else{
                 PrintFila(filaPedido);
             }
