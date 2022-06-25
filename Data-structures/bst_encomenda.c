@@ -81,8 +81,7 @@ BSTEncomendaNode* RemoveNode(BSTEncomendas* bst, int id)
 {
   BSTEncomendaNode* toRemove = SearchNode(bst->root, id);
   BSTEncomendaNode* dad = toRemove->valor->id != bst->root->valor->id ? SearchDad(bst, id) : NULL;
-
-  printf("toRemove: %d", toRemove->valor->id);
+  if(toRemove->valor->id != id) return NULL;
 
   if(dad == NULL) {
     BSTEncomendaNode* rootSub = GotoSmallest(toRemove->right);
