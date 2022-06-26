@@ -23,7 +23,7 @@ void AddNode(BSTEncomendas* bst, Encomenda* encomenda)
 BSTEncomendaNode* RemoveNode(BSTEncomendas* bst, int id)
 {
   BSTEncomendaNode* toRemove = SearchNode(bst->root, id);
-  BSTEncomendaNode* dad = toRemove->valor->id != bst->root->valor->id ? SearchDad(bst, id) : NULL;
+  BSTEncomendaNode* dad = SearchDad(bst, id);
   if(toRemove->valor->id != id) return NULL;
 
   if(dad == NULL) {
@@ -100,6 +100,8 @@ BSTEncomendaNode* SearchNode(BSTEncomendaNode* node, int id)
 }
 BSTEncomendaNode* SearchDad(BSTEncomendas* bst, int id)
 {
+  if(bst->root != NULL && bst->root->valor->id == id) return NULL;
+
   BSTEncomendaNode *aux = bst->root;
   while (aux->left != NULL && aux->right != NULL)
   {
