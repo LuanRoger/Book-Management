@@ -137,6 +137,8 @@ void DeleteNode(BSTEncomendaNode* node) {
 
 void PrintPreOrder(BSTEncomendaNode* node)
 {
+  if(node == NULL) return;
+
   printf("%d\n", node->valor->id);
 
   if (node->left != NULL)
@@ -147,6 +149,8 @@ void PrintPreOrder(BSTEncomendaNode* node)
 
 void PrintInOrder(BSTEncomendaNode *node)
 {
+  if(node == NULL) return;
+
   if (node->left != NULL)
     PrintInOrder(node->left);
 
@@ -165,6 +169,8 @@ void PrintInOrder(BSTEncomendaNode *node)
 
 void PrintPosOrder(BSTEncomendaNode *node)
 {
+  if(node == NULL) return;
+
   if (node->left != NULL)
     PrintPosOrder(node->left);
   if (node->right != NULL)

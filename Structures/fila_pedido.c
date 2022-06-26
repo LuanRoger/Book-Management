@@ -27,8 +27,6 @@ void AddFilaPedido(FilaPedido* fila, Pedido* pedido){
     }
 
     fila->len++;
-    printf("\nPEDIDO CRIADO COM SUCESSO!\n");
-
 }
 
 Pedido* RemoveFilaPedido(FilaPedido* fila) {

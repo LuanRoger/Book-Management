@@ -11,6 +11,7 @@
 #include "Generators/id_generator.h"
 #include "Workflows/cadastrar_pedido_workflow.h"
 #include "Workflows/cadastrar_encomenda_workflow.h"
+#include "Workflows/login_workflow.h"
 //TODO: limpar termina depois uma operacao
 
 int main(){
@@ -55,28 +56,16 @@ int main(){
             AddNode(bst, newEncomenda);
             printf("\nENCOMENDA CRIADA COM SUCESSO!\n");
         }
-        else if(resp == 2) { //TODO: Create a dedicated workflow
-            if(bst->root == NULL)
-                printf("NENHUMA ENCOMENDA CADASTRADA.\n");
-            else {
-                printf("AVISO: SOMENTE SECRETÁRIOS TEM ACESSO.\n");
-                
-                Usuario* user = VerificationPassword(listaUsers);
-                if(user == NULL)
-                    printf("\nSENHA E/OU USUARIO INCORRETO!\n");
-                else {
-                    if(VerificationCargo(user, CARGO_SECRETARIO) != 0)
-                        printf("\nUSUARIO SEM PERMISSÃO\n");
-                    else {
-                        PrintInOrder(bst->root);
-
-                        Pedido* newPedido = CadastrarPedidoWorkflow(bst, user);
-                        if(newPedido == NULL)
-                            printf("\nESSA ENCOMENDA NÃO EXISTE!\n");
-                        else 
-                            AddFilaPedido(filaPedido, newPedido);
-                    }
+        else if(resp == 2) {
+            Usuario* secretarioUser = CheckUserCredentialsWorkflow(listaUsers, CARGO_SECRETARIO);
+            if(secretarioUser != NULL) {
+                PrintInOrder(bst->root);
+                Pedido* newPedido = CadastrarPedidoWorkflow(bst, secretarioUser);
+                if(newPedido != NULL) {
+                    AddFilaPedido(filaPedido, newPedido);
+                    printf("\nPEDIDO CRIADO COM SUCESSO!\n");
                 }
+                else printf("NÃO FOI POSSIVEL CADASTRAR O PEDIDO.\n");
             }
         }
         else if(resp == 3) { //TODO: Create a dedicated workflow
