@@ -11,6 +11,7 @@
 #include "Generators/id_generator.h"
 #include "Workflows/cadastrar_pedido_workflow.h"
 #include "Workflows/cadastrar_encomenda_workflow.h"
+#include "Workflows/remover_pedido_workflow.h"
 #include "Workflows/login_workflow.h"
 //TODO: limpar termina depois uma operacao
 
@@ -40,7 +41,6 @@ int main(){
 
     int resp = -1;
     while(resp != 0){
-        
         printf("\n\tBOOK MANAGEMENT\n");
         printf("[1] - Encomendar um livro.\n");
         printf("[2] - Cadastrar pedido.\n");
@@ -68,26 +68,17 @@ int main(){
                 else printf("NÃO FOI POSSIVEL CADASTRAR O PEDIDO.\n");
             }
         }
-        else if(resp == 3) { //TODO: Create a dedicated workflow
-            if(filaPedido->len > 0){
-                printf("AVISO: SOMENTE TRANSPORTADORES TEM ACESSO\n");
-
-                Usuario* user = VerificationPassword(listaUsers);
-                if(user == NULL){
-                    printf("\nSENHA E/OU USUARIO INCORRETO!\n");
-
-                }else{
-                    if(VerificationCargo(user, CARGO_TRANSPORTADOR) == 0){
-                        //pode fazer as coisas aqui dentro, encima tem a verificação completa
-
-                    }else{
-                        printf("\nUSUARIO SEM PERMISSÃO\n");
-                    }
-                    
+        else if(resp == 3) {
+            Usuario* transportadorUser = CheckUserCredentialsWorkflow(listaUsers, CARGO_TRANSPORTADOR);
+            if(transportadorUser != NULL) {
+                PrintFila(filaPedido);
+                int removeResult = RemoverPedidoWorkflow(filaPedido);
+                
+                if(removeResult == 1) {
+                    RemoveFilaPedido(filaPedido);
+                    printf("PEDIDO REMOVIDO COM SUCESSO!\n");   
                 }
-
-            }else{
-                printf("\nNENHUM PEDIDO CADASTRADO\n");
+                else printf("Ação cnacelada.\n");
             }
         }
         else if(resp == 4){

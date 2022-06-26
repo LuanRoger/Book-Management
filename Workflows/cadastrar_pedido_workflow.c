@@ -21,10 +21,10 @@ Pedido* CadastrarPedidoWorkflow(BSTEncomendas* bst, Usuario* user) {
     int prioridade;
 
     printf("\nDigite o campus do livro:\n");
-    fgets(campus_livro, BUFFER_STRING_SIZE, stdin);
+    scanf(" %[^\n]s", campus_livro);
     
     printf("\nDigite o campus do aluno:\n");
-    fgets(campus_aluno, BUFFER_STRING_SIZE, stdin);
+    scanf(" %[^\n]s", campus_aluno);
 
     do {
         printf("\nDigite a prioridade (0 ~ 100):\n");
