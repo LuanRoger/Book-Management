@@ -1,38 +1,40 @@
 #include "fila_pedido.h"
 
 void AddFilaPedido(FilaPedido* fila, Pedido* pedido){
-    FilaItem* novoItem = malloc(sizeof(FilaItem));
-    novoItem->valor = pedido;
-    novoItem->prox = NULL;
+    FilaItem* newPedido = malloc(sizeof(FilaItem));
+    newPedido->valor = pedido;
+    newPedido->prox = NULL;
+    newPedido->ant = NULL;
 
-    if(fila->inicio == NULL){
-        fila->inicio = novoItem;
-        fila->fim = novoItem;
-    }
-    else if(fila->inicio->valor->prioridade < pedido->prioridade){
-        novoItem->prox = fila->inicio;
-        fila->inicio = novoItem;
-    }
-    else if(fila->fim->valor->prioridade > pedido->prioridade){
-        fila->fim->prox = novoItem;
-        novoItem = fila->fim;
+    if(fila->inicio == NULL)
+        fila->inicio = newPedido;
+    else if(pedido->prioridade > fila->inicio->valor->prioridade) {
+        fila->inicio->ant = newPedido;
+        newPedido->prox = fila->inicio;
+
+        fila->inicio = newPedido;
     }
     else {
         FilaItem* aux = fila->inicio;
-        while (aux->valor->prioridade < pedido->prioridade)
+        while (pedido->prioridade < aux->valor->prioridade && aux->prox != NULL)
             aux = aux->prox;
 
-        novoItem->prox = aux->prox;
-        aux->prox = novoItem;
+        if(aux->ant != NULL)
+            aux->ant->prox = newPedido;
+        
+        newPedido->prox = aux;
     }
 
     fila->len++;
 }
 FilaItem* RemoveFilaPedido(FilaPedido* fila) {
     FilaItem* toRemove = fila->inicio;
-    if(toRemove->prox != NULL)
+    if(toRemove->prox != NULL) {
         fila->inicio = toRemove->prox;
+        fila->inicio->ant = NULL;
+    }
 
+    fila->len--;
     return toRemove;
 }
 
@@ -44,19 +46,26 @@ Pedido* UnwrapFilaItem(FilaItem* filaItem) {
 }
 
 void PrintFila(FilaPedido* fila) {
+    if(fila->inicio == NULL) return;
+
     FilaItem* aux = fila->inicio;
     for(int i = 0; i < fila->len; i++){
-        printf("╔════════════════════════════════════════════════════════════╗\n");
-        printf(" ID: %d\n", aux->valor->info_encomenda->id);
-        printf(" Nome do aluno: %s\n", aux->valor->info_encomenda->nome_aluno);
-        printf(" Matricula do aluno: %s\n", aux->valor->info_encomenda->matricula);
-        printf(" Descrição: %s\n", aux->valor->info_encomenda->descricao);
-        printf(" Campus de saida: %s", aux->valor->campus_livro);
-        printf(" Campus de entrada: %s", aux->valor->campus_aluno);
-        printf(" Responsável: %s\n", aux->valor->responsavel_encomenda);
-        printf(" Prioridade: %d\n", aux->valor->prioridade);
-        printf("╚════════════════════════════════════════════════════════════╝\n");
-        printf("\n");
+        PrintPedidoFilaItem(aux);
         aux = aux->prox;
     }
+}
+void PrintPedidoFilaItem(FilaItem* filaItem) {
+    Pedido* itemValor = filaItem->valor;
+
+    printf("╔════════════════════════════════════════════════════════════╗\n");
+    printf(" ID: %d\n", itemValor->info_encomenda->id);
+    printf(" Nome do aluno: %s\n", itemValor->info_encomenda->nome_aluno);
+    printf(" Matricula do aluno: %s\n", itemValor->info_encomenda->matricula);
+    printf(" Descrição: %s\n", itemValor->info_encomenda->descricao);
+    printf(" Campus de saida: %s\n", itemValor->campus_livro);
+    printf(" Campus de entrada: %s\n", itemValor->campus_aluno);
+    printf(" Responsável: %s\n", itemValor->responsavel_encomenda);
+    printf(" Prioridade: %d\n", itemValor->prioridade);
+    printf("╚════════════════════════════════════════════════════════════╝\n");
+    printf("\n");
 }

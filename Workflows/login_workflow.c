@@ -21,7 +21,7 @@ Usuario* CheckUserCredentialsWorkflow(ListaUsuario* listaUsers, int cargoId) {
         return NULL;
     }
     if(VerificationCargo(user, cargoId) != 0) {
-        printf("\nUSUARIO SEM PERMISSÃO\n");
+        printf("\nUSUARIO SEM PERMISSÃO.\n");
         return NULL;
     }
     
