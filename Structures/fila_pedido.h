@@ -17,6 +17,9 @@ typedef struct FilaPedido{
 }FilaPedido;
 
 void AddFilaPedido(FilaPedido* fila, Pedido* pedido);
-Pedido* RemoveFilaPedido(FilaPedido* fila);
+FilaItem* RemoveFilaPedido(FilaPedido* fila);
+
+Pedido* UnwrapFilaItem(FilaItem* filaItem);
+
 void PrintFila(FilaPedido* fila);
 #endif

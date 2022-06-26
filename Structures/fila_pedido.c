@@ -1,4 +1,4 @@
-#include "queue_pedido.h"
+#include "fila_pedido.h"
 
 void AddFilaPedido(FilaPedido* fila, Pedido* pedido){
     FilaItem* novoItem = malloc(sizeof(FilaItem));
@@ -27,18 +27,20 @@ void AddFilaPedido(FilaPedido* fila, Pedido* pedido){
     }
 
     fila->len++;
-    printf("\nPEDIDO CRIADO COM SUCESSO!\n");
+}
+FilaItem* RemoveFilaPedido(FilaPedido* fila) {
+    FilaItem* toRemove = fila->inicio;
+    if(toRemove->prox != NULL)
+        fila->inicio = toRemove->prox;
 
+    return toRemove;
 }
 
-Pedido* RemoveFilaPedido(FilaPedido* fila) {
-    FilaItem* lixo = fila->inicio;
-    if(lixo->prox != NULL)
-        fila->inicio = lixo->prox;
+Pedido* UnwrapFilaItem(FilaItem* filaItem) {
+    Pedido* pedido = filaItem->valor;
 
-    Pedido* isolated_pedido = lixo->valor;
-    free(lixo);
-    return isolated_pedido;
+    free(filaItem);
+    return pedido;
 }
 
 void PrintFila(FilaPedido* fila) {

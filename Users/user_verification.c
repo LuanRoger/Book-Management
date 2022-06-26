@@ -13,16 +13,12 @@ Usuario* VerificationPassword(ListaUsuario* list){
     scanf(" %s", senha);
 
     for(int i = 0; i < list->len; i++){
-        
-        if((strcmp(aux->valor->cpf, cpf) == 0) && (strcmp(aux->valor->senha, senha) == 0)){
+        if((strcmp(aux->valor->cpf, cpf) == 0) && (strcmp(aux->valor->senha, senha) == 0))
             return aux->valor;
-    
-        }
+            
         aux = aux->prox;   
     }
-        
     return NULL;
-
 }
 
 

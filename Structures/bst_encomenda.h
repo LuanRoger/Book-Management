@@ -18,12 +18,12 @@ typedef struct BSTEncomendas
 
 void AddNode(BSTEncomendas* bst, Encomenda* encomenda);
 BSTEncomendaNode* RemoveNode(BSTEncomendas* bst, int id);
-BSTEncomendaNode* SearchNode(BSTEncomendaNode *node, int id);
+BSTEncomendaNode* SearchNode(BSTEncomendaNode* node, int id);
 BSTEncomendaNode* SearchDad(BSTEncomendas* bst, int id);
 BSTEncomendaNode* GotoSmallest(BSTEncomendaNode* start);
 BSTEncomendaNode* GotoHigher(BSTEncomendaNode* start);
 
-void DeleteBSTNode(BSTEncomendaNode* node);
+Encomenda* UnwrapBSTNode(BSTEncomendaNode* node);
 
 void PrintPreOrder(BSTEncomendaNode* node);
 void PrintInOrder(BSTEncomendaNode* node);

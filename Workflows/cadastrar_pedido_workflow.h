@@ -1,7 +1,7 @@
-#include <stdio.h>
-#include "../Data-structures/bst_encomenda.h"
+#include "../Structures/bst_encomenda.h"
 #include "../Models/pedido.h"
 #include "../Models/usuario.h"
+#include <stdio.h>
 
 #ifndef CADASTRAR_PEDIDO_WORKFLOW_H
 #define CADASTRAR_PEDIDO_WORKFLOW_H
