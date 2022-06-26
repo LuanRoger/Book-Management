@@ -1,4 +1,4 @@
-#include "../Data-structures/bst_encomenda.h"
+#include "../Structures/bst_encomenda.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>

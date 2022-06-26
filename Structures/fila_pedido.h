@@ -9,14 +9,18 @@ typedef struct FilaItem{
     Pedido* valor;
     
     struct FilaItem* prox;
+    struct FilaItem* ant;
 }FilaItem;
 typedef struct FilaPedido{
     FilaItem* inicio;
-    FilaItem* fim;
     int len;
 }FilaPedido;
 
 void AddFilaPedido(FilaPedido* fila, Pedido* pedido);
-Pedido* RemoveFilaPedido(FilaPedido* fila);
+FilaItem* RemoveFilaPedido(FilaPedido* fila);
+
+Pedido* UnwrapFilaItem(FilaItem* filaItem);
+
 void PrintFila(FilaPedido* fila);
+void PrintPedidoFilaItem(FilaItem* filaItem);
 #endif

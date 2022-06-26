@@ -1,13 +1,19 @@
 #include "cadastrar_pedido_workflow.h"
 
 Pedido* CadastrarPedidoWorkflow(BSTEncomendas* bst, Usuario* user) {
-    int encomendaId;
+    if(bst->root == NULL) {
+        printf("NENHUMA ENCOMENDA CADASTRADA.\n");
+        return NULL;
+    }
 
+    int encomendaId;
     printf("Digite o ID da encomenda:\n");
     scanf("%d%*c", &encomendaId);
 
-    BSTEncomendaNode* encomenda = RemoveNode(bst, encomendaId);
-    if(encomenda == NULL) return NULL;
+    BSTEncomendaNode* encomendaNode = RemoveNode(bst, encomendaId);
+    Encomenda* encomenda = NULL;
+    if(encomendaNode == NULL) return NULL;
+    encomenda = UnwrapBSTNode(encomendaNode);
 
     char* campus_livro = malloc(BUFFER_STRING_SIZE);
     char* campus_aluno = malloc(BUFFER_STRING_SIZE);
@@ -15,22 +21,20 @@ Pedido* CadastrarPedidoWorkflow(BSTEncomendas* bst, Usuario* user) {
     int prioridade;
 
     printf("\nDigite o campus do livro:\n");
-    fgets(campus_livro, BUFFER_STRING_SIZE, stdin);
+    scanf(" %[^\n]s", campus_livro);
     
     printf("\nDigite o campus do aluno:\n");
-    fgets(campus_aluno, BUFFER_STRING_SIZE, stdin);
+    scanf(" %[^\n]s", campus_aluno);
 
-    do{
+    do {
         printf("\nDigite a prioridade (0 ~ 100):\n");
         scanf("%d%*c", &prioridade);
-        if(prioridade < 0 || prioridade > 100){
-            printf("\nPRIORIDADE FORA DOS LIMITES\n");
 
-        }else{
-            break;
-        }
+        if(prioridade < 0 || prioridade > 100)
+            printf("\nPRIORIDADE FORA DOS LIMITES\n");
+        else break;
         
     }while(1);
 
-    return CriarPedido(encomenda->valor, campus_livro, campus_aluno, user->nome, prioridade);
+    return CriarPedido(encomenda, campus_livro, campus_aluno, user->nome, prioridade);
 }
