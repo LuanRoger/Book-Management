@@ -1,8 +1,9 @@
+#include "../Structures/lista_usuario.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdio.h>
 #include <stdbool.h>
-#include "../Data-structures/list_usuario.h"
+
 #ifndef VERIFICATION_H
 #define VERIFICATION_H
 #define CARGO_SECRETARIO 1

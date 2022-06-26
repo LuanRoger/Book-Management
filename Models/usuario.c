@@ -1,5 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "usuario.h"
 
 Usuario *CriarUsuario(char *nome_usuario, char *cpf, char *senha, int cargo){
