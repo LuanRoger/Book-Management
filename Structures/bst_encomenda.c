@@ -1,30 +1,5 @@
 #include "bst_encomenda.h"
 
-BSTEncomendaNode* SearchNode(BSTEncomendaNode* node, int id)
-{
-  if (node == NULL)
-    return NULL;
-
-  if (node->valor->id == id)
-    return node;
-  else if (node->valor->id > id)
-  {
-    if (node->left != NULL)
-      return SearchNode(node->left, id);
-    else
-      return node;
-  }
-  else if (node->valor->id < id)
-  {
-    if (node->right != NULL)
-      return SearchNode(node->right, id);
-    else
-      return node;
-  }
-
-  return NULL;
-}
-
 void AddNode(BSTEncomendas* bst, Encomenda* encomenda)
 {
     BSTEncomendaNode* aux = SearchNode(bst->root, encomenda->id);
@@ -44,38 +19,6 @@ void AddNode(BSTEncomendas* bst, Encomenda* encomenda)
         else
         aux->right = novo;
     }
-}
-BSTEncomendaNode* SearchDad(BSTEncomendas* bst, int id)
-{
-  BSTEncomendaNode *aux = bst->root;
-  while (aux->left != NULL && aux->right != NULL)
-  {
-    if (aux->right != NULL && aux->right->valor->id == id ||
-        aux->left != NULL && aux->left->valor->id == id)
-      return aux;
-
-    if (id > aux->valor->id)
-      aux = aux->right;
-    else
-      aux = aux->left;
-  }
-
-  return aux;
-}
-BSTEncomendaNode* GotoSmallest(BSTEncomendaNode* start)
-{
-  BSTEncomendaNode* aux = start;
-  while (aux->left != NULL)
-    aux = aux->left;
-
-  return aux;
-}
-BSTEncomendaNode* GotoHigher(BSTEncomendaNode* start) {
-  BSTEncomendaNode* aux = start;
-  while (aux->right != NULL)
-    aux = aux->right;
-  
-  return aux;
 }
 BSTEncomendaNode* RemoveNode(BSTEncomendas* bst, int id)
 {
@@ -130,9 +73,69 @@ BSTEncomendaNode* RemoveNode(BSTEncomendas* bst, int id)
 
   return toRemove;
 }
-void DeleteNode(BSTEncomendaNode* node) {
-  DeletarEncomenda(node->valor);
+
+BSTEncomendaNode* SearchNode(BSTEncomendaNode* node, int id)
+{
+  if (node == NULL)
+    return NULL;
+
+  if (node->valor->id == id)
+    return node;
+  else if (node->valor->id > id)
+  {
+    if (node->left != NULL)
+      return SearchNode(node->left, id);
+    else
+      return node;
+  }
+  else if (node->valor->id < id)
+  {
+    if (node->right != NULL)
+      return SearchNode(node->right, id);
+    else
+      return node;
+  }
+
+  return NULL;
+}
+BSTEncomendaNode* SearchDad(BSTEncomendas* bst, int id)
+{
+  BSTEncomendaNode *aux = bst->root;
+  while (aux->left != NULL && aux->right != NULL)
+  {
+    if (aux->right != NULL && aux->right->valor->id == id ||
+        aux->left != NULL && aux->left->valor->id == id)
+      return aux;
+
+    if (id > aux->valor->id)
+      aux = aux->right;
+    else
+      aux = aux->left;
+  }
+
+  return aux;
+}
+BSTEncomendaNode* GotoSmallest(BSTEncomendaNode* start)
+{
+  BSTEncomendaNode* aux = start;
+  while (aux->left != NULL)
+    aux = aux->left;
+
+  return aux;
+}
+BSTEncomendaNode* GotoHigher(BSTEncomendaNode* start) {
+  BSTEncomendaNode* aux = start;
+  while (aux->right != NULL)
+    aux = aux->right;
+  
+  return aux;
+}
+
+Encomenda* UnwrapBSTNode(BSTEncomendaNode* node) {
+  Encomenda* encomenda = node->valor;
+
   free(node);
+  return encomenda;
 }
 
 void PrintPreOrder(BSTEncomendaNode* node)

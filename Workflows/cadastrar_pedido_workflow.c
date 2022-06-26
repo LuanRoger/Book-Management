@@ -10,8 +10,10 @@ Pedido* CadastrarPedidoWorkflow(BSTEncomendas* bst, Usuario* user) {
     printf("Digite o ID da encomenda:\n");
     scanf("%d%*c", &encomendaId);
 
-    BSTEncomendaNode* encomenda = RemoveNode(bst, encomendaId);
-    if(encomenda == NULL) return NULL;
+    BSTEncomendaNode* encomendaNode = RemoveNode(bst, encomendaId);
+    Encomenda* encomenda = NULL;
+    if(encomendaNode == NULL) return NULL;
+    encomenda = UnwrapBSTNode(encomendaNode);
 
     char* campus_livro = malloc(BUFFER_STRING_SIZE);
     char* campus_aluno = malloc(BUFFER_STRING_SIZE);
@@ -34,5 +36,5 @@ Pedido* CadastrarPedidoWorkflow(BSTEncomendas* bst, Usuario* user) {
         
     }while(1);
 
-    return CriarPedido(encomenda->valor, campus_livro, campus_aluno, user->nome, prioridade);
+    return CriarPedido(encomenda, campus_livro, campus_aluno, user->nome, prioridade);
 }

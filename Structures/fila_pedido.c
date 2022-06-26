@@ -28,15 +28,19 @@ void AddFilaPedido(FilaPedido* fila, Pedido* pedido){
 
     fila->len++;
 }
+FilaItem* RemoveFilaPedido(FilaPedido* fila) {
+    FilaItem* toRemove = fila->inicio;
+    if(toRemove->prox != NULL)
+        fila->inicio = toRemove->prox;
 
-Pedido* RemoveFilaPedido(FilaPedido* fila) {
-    FilaItem* lixo = fila->inicio;
-    if(lixo->prox != NULL)
-        fila->inicio = lixo->prox;
+    return toRemove;
+}
 
-    Pedido* isolated_pedido = lixo->valor;
-    free(lixo);
-    return isolated_pedido;
+Pedido* UnwrapFilaItem(FilaItem* filaItem) {
+    Pedido* pedido = filaItem->valor;
+
+    free(filaItem);
+    return pedido;
 }
 
 void PrintFila(FilaPedido* fila) {
