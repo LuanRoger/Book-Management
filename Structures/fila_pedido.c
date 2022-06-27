@@ -16,13 +16,17 @@ void AddFilaPedido(FilaPedido* fila, Pedido* pedido){
     }
     else {
         FilaItem* aux = fila->inicio;
-        while (pedido->prioridade < aux->valor->prioridade && aux->prox != NULL)
+        while (aux->prox != NULL && pedido->prioridade <= aux->prox->valor->prioridade)
             aux = aux->prox;
-
-        if(aux->ant != NULL)
-            aux->ant->prox = newPedido;
         
-        newPedido->prox = aux;
+        newPedido->prox = aux->prox;
+        newPedido->ant = aux;
+        
+        if(aux->prox != NULL)
+        aux->prox->ant = newPedido;
+
+        aux->prox = newPedido;
+        
     }
 
     fila->len++;
