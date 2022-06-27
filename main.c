@@ -39,8 +39,10 @@ int main(){
     BSTEncomendas* bst = malloc(sizeof(BSTEncomendas));
     FilaPedido* filaPedido = malloc(sizeof(FilaPedido));
 
-    int resp = -1;
-    while(resp != 0){
+    int resp;
+
+
+    while(1){
         printf("\n\tBOOK MANAGEMENT\n");
         printf("[1] - Encomendar um livro.\n");
         printf("[2] - Cadastrar pedido.\n");
@@ -51,24 +53,30 @@ int main(){
         printf("\nDigite a funcionalidade desejada: ");
         scanf("%d", &resp);
 
-        if(resp == 1) {
+        switch(resp){
+        case 1: 
             Encomenda* newEncomenda = CadastrarEncomendaWorkflow(id_generator(bst));
             AddNode(bst, newEncomenda);
+            system("clear");
             printf("\nENCOMENDA CRIADA COM SUCESSO!\n");
-        }
-        else if(resp == 2) {
+            break;
+        
+        case 2:
             Usuario* secretarioUser = CheckUserCredentialsWorkflow(listaUsers, CARGO_SECRETARIO);
             if(secretarioUser != NULL) {
                 PrintInOrder(bst->root);
                 Pedido* newPedido = CadastrarPedidoWorkflow(bst, secretarioUser);
                 if(newPedido != NULL) {
                     AddFilaPedido(filaPedido, newPedido);
+                    system("clear");
                     printf("\nPEDIDO CRIADO COM SUCESSO!\n");
                 }
                 else printf("NÃO FOI POSSIVEL CADASTRAR O PEDIDO.\n");
             }
-        }
-        else if(resp == 3) {
+            break;
+
+
+        case 3:
             Usuario* transportadorUser = CheckUserCredentialsWorkflow(listaUsers, CARGO_TRANSPORTADOR);
             if(transportadorUser != NULL) {
                 PrintFila(filaPedido);
@@ -78,22 +86,31 @@ int main(){
                     RemoveFilaPedido(filaPedido);
                     printf("PEDIDO REMOVIDO COM SUCESSO!\n");   
                 }
-                else printf("Ação cnacelada.\n");
+                else printf("Ação cancelada.\n");
             }
-        }
-        else if(resp == 4){
+            break;
+
+
+        case 4:
             if(bst->root == NULL){
                 printf("\nNENHUMA ENCOMENDA CADASTRADA.\n");
             }else{
                 PrintInOrder(bst->root);
             }
-        }
-        else if(resp == 5){
+            break;
+
+
+        case 5:
             if(filaPedido->len == 0){
                 printf("\nNENHUM PEDIDO CADASTRADO.\n");
             }else{
                 PrintFila(filaPedido);
             }
+            break;
+        
+        default:
+            printf("\nOPÇÃO INVÁLIDA!\n");
+            
         }
         
     }
