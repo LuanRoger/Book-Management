@@ -1,8 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #ifndef USUARIO_H
 #define USUARIO_H
+
+#define STRING_USER_BUFFER sizeof(char)*256
 
 typedef struct Usuario{
     char *nome;
