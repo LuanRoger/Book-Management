@@ -1,11 +1,11 @@
 #include "id_generator.h"
 
-int id_generator(BSTEncomendas* bst) {
-    int id = 5000;
-    srand(time(NULL));
+int id_generator(){
+    int ids[15] = {500, 250, 750, 125, 325, 625, 875, 62, 187, 256, 581, 603, 650, 780, 937};
     
-    if(bst->root != NULL)
-        id = rand() % 9999;
+    static int count = 0;
 
+    int id = ids[count];
+    count++;
     return id;
 }

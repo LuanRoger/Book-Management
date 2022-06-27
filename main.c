@@ -13,7 +13,6 @@
 #include "Workflows/cadastrar_encomenda_workflow.h"
 #include "Workflows/remover_pedido_workflow.h"
 #include "Workflows/login_workflow.h"
-//TODO: limpar termina depois uma operacao
 
 int main(){
     Usuario* user1 = CriarUsuario("Vinicius de Oliviera Costa", "814.587.813-64", "1234", 1);
