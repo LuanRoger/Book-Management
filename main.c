@@ -54,14 +54,14 @@ int main(){
         
         
         switch(resp){
-        case 1: 
+        case 1: {
             Encomenda* newEncomenda = CadastrarEncomendaWorkflow(id_generator(bst));
             AddNode(bst, newEncomenda);
             system("clear");
             printf("\nENCOMENDA CRIADA COM SUCESSO!\n");
             break;
-        
-        case 2:
+        }        
+        case 2: {
             Usuario* secretarioUser = CheckUserCredentialsWorkflow(listaUsers, CARGO_SECRETARIO);
             if(secretarioUser != NULL) {
                 PrintInOrder(bst->root);
@@ -74,9 +74,8 @@ int main(){
                 else printf("NÃO FOI POSSIVEL CADASTRAR O PEDIDO.\n");
             }
             break;
-
-
-        case 3:
+        }
+        case 3: {
             Usuario* transportadorUser = CheckUserCredentialsWorkflow(listaUsers, CARGO_TRANSPORTADOR);
             if(transportadorUser != NULL) {
                 PrintFila(filaPedido);
@@ -89,8 +88,7 @@ int main(){
                 else printf("Ação cancelada.\n");
             }
             break;
-
-
+        }
         case 4:
             if(bst->root == NULL){
                 printf("\nNENHUMA ENCOMENDA CADASTRADA.\n");
