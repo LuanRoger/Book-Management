@@ -38,10 +38,10 @@ int main(){
     BSTEncomendas* bst = malloc(sizeof(BSTEncomendas));
     FilaPedido* filaPedido = malloc(sizeof(FilaPedido));
 
-    int resp;
+    int resp = 1;
 
 
-    while(1){
+    while(resp != 0){
         printf("\n\tBOOK MANAGEMENT\n");
         printf("[1] - Encomendar um livro.\n");
         printf("[2] - Cadastrar pedido.\n");
@@ -51,7 +51,8 @@ int main(){
         printf("[0] - Sair do sistema!\n");
         printf("\nDigite a funcionalidade desejada: ");
         scanf("%d", &resp);
-
+        
+        
         switch(resp){
         case 1: 
             Encomenda* newEncomenda = CadastrarEncomendaWorkflow(id_generator(bst));
@@ -105,6 +106,10 @@ int main(){
             }else{
                 PrintFila(filaPedido);
             }
+            break;
+
+        case 0:
+            printf("\nSAINDO...\n");
             break;
         
         default:
